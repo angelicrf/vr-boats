@@ -10,6 +10,14 @@
 /[Ll]ogs/
 /[Mm]emoryCaptures/
 
+/BoatRunners/[Ll]ibrary/
+/BoatRunners/[Tt]emp/
+/BoatRunners/[Oo]bj/
+/BoatRunners/[Bb]uild/
+/BoatRunners/[Bb]uilds/
+/BoatRunners/[Ll]ogs/
+/BoatRunners/[Mm]emoryCaptures/
+
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
 
