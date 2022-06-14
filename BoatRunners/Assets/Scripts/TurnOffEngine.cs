@@ -2,34 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SteerBoatOne : MonoBehaviour
+public class TurnOffEngine : MonoBehaviour
 {
     public GameObject thisBoat;
     private Rigidbody rd;
-    private bool isDriving;
+    private bool isStoped;
     private void Start()
     {
-        isDriving = false;
+
+        isStoped = false;
         rd = thisBoat.GetComponent<Rigidbody>();
     }
     private void FixedUpdate()
     {
-        if (isDriving)
+        if (isStoped)
         {   //add controller input
             //set velocity
-            rd.drag = 0;
-            rd.AddForce( -Vector3.forward , ForceMode.Impulse );
-            isDriving = false;
+            rd.drag = 50f;
+            isStoped = false;
         }
+ 
     }
     private void OnTriggerEnter(Collider other)
     {
+
         if (thisBoat && rd)
-            {
-            isDriving = true;
-            }
+        {
+            Debug.Log( "coliderOff" );
+            isStoped = true;
+        }
     }
-    //private void OnTriggerExit(Collider other)
-    //{
-    //}
 }
