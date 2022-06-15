@@ -16,7 +16,6 @@ public class SteerBoatOne : MonoBehaviour
     {
         isTurning = false;
         isNotTurning = false;
-        isLeftTurn = false;
         rd = thisBoat.GetComponent<Rigidbody>();
     }
     private void FixedUpdate()
@@ -40,13 +39,10 @@ public class SteerBoatOne : MonoBehaviour
                 {
                     StartCoroutine( MoveBoatCo() );
                 }
-                if (thisRot.eulerAngles.z > 220f && thisRot.eulerAngles.z < 350f)
+                else 
+                //if (thisRot.eulerAngles.z > 220f && thisRot.eulerAngles.z < 350f)
                 {
-                    Debug.Log( "exitTrigger" + transform.forward );
-                    transform.RotateAround( transform.position , - transform.forward  , speed * Time.deltaTime );
-                    //thisBoat.transform.transform.Rotate( 0 , transform.up.y , 0 , Space.Self );
-                    //thisBoat.transform.RotateAround( transform.position , transform.TransformDirection(- Vector3.up ) , speed * Time.deltaTime );
-                    prevValueRot = transform.rotation;
+                    StartCoroutine( MoveRightBoatCo() );
                 }
             }
         }
@@ -60,7 +56,14 @@ public class SteerBoatOne : MonoBehaviour
         transform.RotateAround( transform.position , transform.forward , speed * Time.deltaTime );       
         prevValueRot = transform.rotation;
         yield return new WaitForSeconds( 1f );
-        thisBoat.transform.RotateAround(thisBoat.transform.position , thisBoat.transform.up , speed * Time.deltaTime );
+        thisBoat.transform.RotateAround(thisBoat.transform.position , - thisBoat.transform.up , speed * Time.deltaTime );
+    }
+    IEnumerator MoveRightBoatCo()
+    {
+        transform.RotateAround( transform.position , - transform.forward , speed * Time.deltaTime );
+        prevValueRot = transform.rotation;
+        yield return new WaitForSeconds( 1f );
+        thisBoat.transform.RotateAround( thisBoat.transform.position ,  thisBoat.transform.up , speed * Time.deltaTime );
     }
     private void OnTriggerEnter(Collider other)
     {
