@@ -1710,8 +1710,22 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.35933432, y: 0.2897733, z: 0.18556938}
-  m_Center: {x: 0.3125583, y: 0.346932, z: 0.0032245596}
+  m_Size: {x: 0.9844511, y: 0.98364013, z: 0.077830695}
+  m_Center: {x: 0, y: -0.000000003778562, z: 0.057093523}
+--- !u!114 &102416702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102416697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bae2b8c2bebf21f49be319584867c881, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisBoat: {fileID: 1230423804}
+  speed: 10
 --- !u!4 &110492032 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 476124, guid: 5cf375f9208bd17468242e6d1c3cc819, type: 3}
@@ -10252,6 +10266,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: boat_1
       objectReference: {fileID: 0}
+    - target: {fileID: 4222727660332750, guid: 67983a0d7ec8d4f6ab99828aa636a80f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4222727660332750, guid: 67983a0d7ec8d4f6ab99828aa636a80f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4253966930451744, guid: 67983a0d7ec8d4f6ab99828aa636a80f, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -18326,7 +18348,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1173346039}
   m_LocalRotation: {x: 0.007874476, y: 0.22188872, z: 0.0039411085, w: -0.97503227}
-  m_LocalPosition: {x: 13.4, y: 3.84, z: 33.12}
+  m_LocalPosition: {x: 5.38, y: 2.47, z: 2.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 33920795}
@@ -25198,7 +25220,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 153044, guid: e1e9f48d71f586e48b0ab82651cd8eb4, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 406738, guid: e1e9f48d71f586e48b0ab82651cd8eb4, type: 3}
       propertyPath: m_RootOrder
@@ -30441,7 +30463,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1955064516}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bae2b8c2bebf21f49be319584867c881, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a6ec6282a926614492106f41e852d4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   thisBoat: {fileID: 1230423804}
