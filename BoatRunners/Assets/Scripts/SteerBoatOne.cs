@@ -75,18 +75,24 @@ public class SteerBoatOne : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (thisBoat && rd)
+        if (other.CompareTag( "Hand" ))
+        {
+            if (thisBoat && rd)
             {
-            isNotTurning = false;
-            isTurning = true;
+                isNotTurning = false;
+                isTurning = true;
             }
+        }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (thisBoat && rd)
+        if (other.CompareTag( "Hand" ))
         {
-            isTurning = false;
-            isNotTurning = true;
+            if (thisBoat && rd)
+            {
+                isTurning = false;
+                isNotTurning = true;
+            }
         }
     }
 }
