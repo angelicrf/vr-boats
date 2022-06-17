@@ -19,17 +19,11 @@ public class TeleportPosition : MonoBehaviour
         {
             StartCoroutine( ChangeTelBoatPosCo() );
         }
-        //if (thisPlayer)
-        //{
-        //    if(thisPlayer.transform.position.y < 4 & !isBoatTeleported & !isTeleported)
-        //        thisPlayer.transform.position = new Vector3( thisPlayer.transform.position.x , 3.7f , thisPlayer.transform.position.z );
-        //}
     }
     IEnumerator ChangeTelBoatPosCo()
     {
         yield return new WaitForSeconds( 2f );
         thisPlayer.transform.position = new Vector3( thisPlayer.transform.position.x , 3f , thisPlayer.transform.position.z );
-        Debug.Log( thisPlayer.transform.position );
     }
     IEnumerator ChangeTelPosCo()
     {

@@ -26,7 +26,7 @@ public class MoveBoat : MonoBehaviour
         {
             var runBoat = device.TryGetFeatureValue( CommonUsages.primary2DAxis , out primaryBtnValue );
             //var getValue = device.TryGetFeatureValue( CommonUsages.deviceRotation , out thisRot );
-            Debug.Log( string.Format( "Device found with name '{0}' and role '{1}' and pos '{2}' " , device.name , device.characteristics.ToString() , primaryBtnValue ) );
+            //Debug.Log( string.Format( "Device found with name '{0}' and role '{1}' and pos '{2}' " , device.name , device.characteristics.ToString() , primaryBtnValue ) );
             ///var direction = new Vector3(primaryBtnValue.x,0,primaryBtnValue.y);
             //thisBoat.transform.Translate(direction  * speed * Time.deltaTime , Space.World );
             if (primaryBtnValue.x > 0 && primaryBtnValue.y > 0)

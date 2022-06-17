@@ -31,18 +31,8 @@ public class SteerBoatOne : MonoBehaviour
 
             foreach (var device in inputDevices)
             {
-                //var runBoat = device.TryGetFeatureValue( CommonUsages.primary2DAxis , out primaryBtnValue );
                 var getValue = device.TryGetFeatureValue( CommonUsages.deviceRotation , out thisRot );
-                Debug.Log( string.Format( "Device found with name '{0}' and role '{1}' and pos '{2}' " , device.name , device.characteristics.ToString() , primaryBtnValue) );
-                //transform.rotation = Quaternion.Lerp( Quaternion.Euler( new Vector3( transform.rotation.eulerAngles.x , transform.rotation.eulerAngles.y , transform.rotation.eulerAngles.z ) ) , Quaternion.Euler(new Vector3( transform.rotation.eulerAngles.x , transform.rotation.eulerAngles.y , thisRot.eulerAngles.z)) , Time.deltaTime * speed );
-
-                // var direction = new Vector3(  , 0f ,  );
-                // transform.Translate( direction * speed * Time.deltaTime , Space.World );
-
-                // Vector3 movement = transform.forward * m_MovementInputValue * m_Speed * Time.deltaTime;
-                // Apply this movement to the rigidbody's position.
-                //m_Rigidbody.MovePosition( m_Rigidbody.position + movement );
-
+                //Debug.Log( string.Format( "Device found with name '{0}' and role '{1}' and pos '{2}' " , device.name , device.characteristics.ToString() , primaryBtnValue) );
                 if (thisRot.eulerAngles.z > 9f && thisRot.eulerAngles.z < 100f)
                 {
                     StartCoroutine( MoveBoatCo() );

@@ -4,15 +4,15 @@ using UnityEngine;
 public class TurnOffEngine : MonoBehaviour
 {
     public GameObject thisBoat;
-    [DefaultValue(false)]
-    public static bool isStoped { get; set; }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Hand")
+        if (other.CompareTag("Hand"))
         {
-            if (thisBoat)
+            if (thisBoat && BoatOneStatics.isSat)
             {
-                isStoped = true;
+                Debug.Log( "stoped" );
+                BoatOneStatics.isStoped = true;
             }
         }
     }
