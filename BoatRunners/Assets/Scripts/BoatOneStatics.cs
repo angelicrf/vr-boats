@@ -5,4 +5,6 @@ public static class BoatOneStatics
     public static bool isStoped { get; set; }
     [DefaultValue( false )]
     public static bool isSat{get;set;}
+    [DefaultValue( false )]
+    public static bool isLightOn { get; set; }
 }

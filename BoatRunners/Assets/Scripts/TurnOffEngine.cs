@@ -9,7 +9,7 @@ public class TurnOffEngine : MonoBehaviour
     {
         if (other.CompareTag("Hand"))
         {
-            if (thisBoat && BoatOneStatics.isSat)
+            if (thisBoat)
             {
                 Debug.Log( "stoped" );
                 BoatOneStatics.isStoped = true;

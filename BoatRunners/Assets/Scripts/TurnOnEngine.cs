@@ -5,6 +5,9 @@ public class TurnOnEngine : MonoBehaviour
 {
     public GameObject thisBoat;
     public GameObject windmill;
+    public GameObject lightOne;
+    public GameObject lightTwo;
+
     private bool isDriving;
     private float speed;
     private Vector3 playerPos;
@@ -17,7 +20,7 @@ public class TurnOnEngine : MonoBehaviour
     {
         if (isDriving)
         {         
-            if (!BoatOneStatics.isStoped && windmill && BoatOneStatics.isSat)
+            if (!BoatOneStatics.isStoped && windmill && !BoatOneStatics.isLightOn)
                {
                 StartCoroutine( RunEngingCo() );       
             }
@@ -27,7 +30,12 @@ public class TurnOnEngine : MonoBehaviour
     {
         //thisPlayer.transform.parent = thisBoat.transform;
         windmill.transform.RotateAround( windmill.transform.position , windmill.transform.forward , Random.Range( 0 , 360 ) );
-        //yield return new WaitForSeconds( 3f );
+        yield return new WaitForSeconds( 2f );
+        if (lightOne && lightTwo)
+        {
+            lightOne.GetComponent<Light>().intensity = 40f;
+            lightTwo.GetComponent<Light>().intensity = 40f;
+        }
         //thisBoat.transform.position += thisBoat.transform.forward * Time.deltaTime * speed;
         yield return null;
     }
@@ -38,6 +46,7 @@ public class TurnOnEngine : MonoBehaviour
         {
             if (thisBoat)
             {
+                BoatOneStatics.isStoped = false;
                 isDriving = true;
             }
         }

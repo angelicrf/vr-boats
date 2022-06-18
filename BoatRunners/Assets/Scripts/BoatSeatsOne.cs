@@ -29,16 +29,8 @@ public class BoatSeatsOne : MonoBehaviour
     {
         if (!BoatOneStatics.isSat && other.CompareTag( "Hand" ))
         {
-            Debug.Log( "sat" );
            BoatOneStatics.isSat = true;
         }
-    }
-    IEnumerator SeatConditionCo()
-    {
-        player.transform.position = new Vector3( gameObject.transform.position.x , gameObject.transform.position.y - 0.5f , transform.position.z - 0.3f );    
-        yield return new WaitForSeconds( 2f );
-        Destroy( gameObject );
-        BoatOneStatics.isSat = false;
     }
   
 }

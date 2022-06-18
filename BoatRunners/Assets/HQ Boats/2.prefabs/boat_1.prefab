@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 426210525}
   - component: {fileID: 426210529}
   - component: {fileID: 426210528}
-  - component: {fileID: 426210527}
   - component: {fileID: 426210526}
   m_Layer: 0
   m_Name: OffBtn
@@ -83,19 +82,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &426210527
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 426210524}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: -0.0000038146973, z: 0}
 --- !u!114 &426210526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,6 +237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hand: {fileID: 0}
   player: {fileID: 0}
+  parentObj: {fileID: 0}
 --- !u!1 &1694964951
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,7 +285,6 @@ GameObject:
   - component: {fileID: 1955064517}
   - component: {fileID: 1955064521}
   - component: {fileID: 1955064520}
-  - component: {fileID: 1955064519}
   - component: {fileID: 1955064518}
   m_Layer: 0
   m_Name: StartBtn
@@ -370,19 +356,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1955064519
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1955064516}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: -0.0000038146973, z: 0}
 --- !u!114 &1955064518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,6 +369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisBoat: {fileID: 1543479163862836}
+  windmill: {fileID: 0}
 --- !u!1 &1031542201060876
 GameObject:
   m_ObjectHideFlags: 0
