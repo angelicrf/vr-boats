@@ -370,6 +370,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thisBoat: {fileID: 1543479163862836}
   windmill: {fileID: 0}
+  lightOne: {fileID: 0}
+  lightTwo: {fileID: 0}
 --- !u!1 &1031542201060876
 GameObject:
   m_ObjectHideFlags: 0

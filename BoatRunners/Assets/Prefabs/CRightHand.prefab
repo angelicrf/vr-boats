@@ -747,7 +747,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5020525161695907012}
   - component: {fileID: 5021400758486632803}
-  - component: {fileID: 2745054145404361982}
   m_Layer: 0
   m_Name: hands:Rhand
   m_TagString: Hand
@@ -846,19 +845,6 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.00881394, y: -0.035866365, z: -0.06288397}
     m_Extent: {x: 0.06873321, y: 0.089190856, z: 0.104687735}
   m_DirtyAABB: 0
---- !u!65 &2745054145404361982
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7675964904476006641}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.30245554, y: 0.2279557, z: 0.28538185}
-  m_Center: {x: 0.026859887, y: 0.029881569, z: -0.0019175485}
 --- !u!1 &7855246447923337855
 GameObject:
   m_ObjectHideFlags: 0
@@ -969,6 +955,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8323619883109061847}
+  - component: {fileID: 8467354137718752346}
   m_Layer: 0
   m_Name: PalmRHand
   m_TagString: Untagged
@@ -990,3 +977,16 @@ Transform:
   m_Father: {fileID: 7370318542197932229}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8467354137718752346
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8323619883109061844}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

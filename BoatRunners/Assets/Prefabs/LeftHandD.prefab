@@ -785,7 +785,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8658733196044515109}
   - component: {fileID: 2864028112346590752}
-  - component: {fileID: 992033453998207899}
+  - component: {fileID: 1488588775532146339}
   m_Layer: 0
   m_Name: hands:Lhand
   m_TagString: Hand
@@ -884,7 +884,7 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.008721359, y: -0.036917455, z: -0.0628327}
     m_Extent: {x: 0.06858664, y: 0.09000083, z: 0.10484411}
   m_DirtyAABB: 0
---- !u!65 &992033453998207899
+--- !u!65 &1488588775532146339
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

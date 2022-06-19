@@ -6,7 +6,7 @@ using UnityEngine.XR;
 public class SteerBoatOne : MonoBehaviour
 {
     public GameObject thisBoat;
-    private Rigidbody rd;
+    public GameObject thisJS;
     private bool isTurning;
     private bool isNotTurning;
     private Vector2 primaryBtnValue;
@@ -16,7 +16,6 @@ public class SteerBoatOne : MonoBehaviour
     {
         isTurning = false;
         isNotTurning = false;
-        rd = thisBoat.GetComponent<Rigidbody>();
     }
     private void FixedUpdate()
     { 
@@ -67,8 +66,9 @@ public class SteerBoatOne : MonoBehaviour
     {
         if (other.CompareTag( "Hand" ))
         {
-            if (thisBoat && rd)
+            if (thisBoat && thisJS)
             {
+                thisJS.SetActive( true );
                 isNotTurning = false;
                 isTurning = true;
             }
@@ -78,7 +78,7 @@ public class SteerBoatOne : MonoBehaviour
     {
         if (other.CompareTag( "Hand" ))
         {
-            if (thisBoat && rd)
+            if (thisBoat)
             {
                 isTurning = false;
                 isNotTurning = true;

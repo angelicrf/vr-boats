@@ -6,13 +6,8 @@ using UnityEngine.XR;
 public class MoveBoat : MonoBehaviour
 {
     public GameObject thisBoat;
-    private Rigidbody rd;
     private Vector2 primaryBtnValue;
     public float speed;
-    private void Start()
-    {
-        rd = thisBoat.GetComponent<Rigidbody>();
-    }
     private void FixedUpdate()
     {
         var inputDevices = new List<InputDevice>();
@@ -32,36 +27,29 @@ public class MoveBoat : MonoBehaviour
             if (primaryBtnValue.x > 0 && primaryBtnValue.y > 0)
             {
                 Vector3 movement = thisBoat.transform.forward * 1f * speed * Time.deltaTime;
-                if (rd)
-                {
-                    rd.MovePosition( rd.position + movement );
-                }
+                    //rd.MovePosition( rd.position + movement );
+                    thisBoat.transform.Translate( movement );
             }else if(primaryBtnValue.x < 0 && primaryBtnValue.y < 0)
             {
                Vector3 movement = thisBoat.transform.forward * -1f * speed * Time.deltaTime;
-                    if (rd)
-                    {
-                        rd.MovePosition( rd.position + movement );
-                    }
+                        //rd.MovePosition( rd.position + movement );
+                thisBoat.transform.Translate( movement );
             }
             else if (primaryBtnValue.y < 0 && primaryBtnValue.x > 0)
             {
                 float turn = primaryBtnValue.y * 1f * Time.deltaTime;
                 Quaternion turnRotation = Quaternion.Euler( 0f , turn * 100 , 0f );
-                if (rd)
-                {  
-                    rd.MoveRotation( rd.rotation * turnRotation );
-                }
+                Vector3 v = new Vector3(turnRotation.eulerAngles.x, turnRotation.eulerAngles.y, turnRotation.eulerAngles.z);
+                //rd.MoveRotation( rd.rotation * turnRotation );
+                thisBoat.transform.Rotate( v );
             }
             else if (primaryBtnValue.y > 0 && primaryBtnValue.x < 0)
             {
                 float turn = primaryBtnValue.y * 1f * Time.deltaTime;
                 Quaternion turnRotation = Quaternion.Euler( 0f , turn * 100 , 0f );
-
-                if (rd)
-                {
-                    rd.MoveRotation( rd.rotation * turnRotation );
-                }
+                Vector3 v = new Vector3( turnRotation.eulerAngles.x , turnRotation.eulerAngles.y , turnRotation.eulerAngles.z );
+                //rd.MoveRotation( rd.rotation * turnRotation );
+                thisBoat.transform.Rotate( v );
             }
 
         }
