@@ -19,13 +19,12 @@ public class BoatMenu : MonoBehaviour
     private bool isRightCam = false;
     private ColorBlock textColorOne;
     private ColorBlock textColorTwo;
-    private void Start()
+
+    private void FixedUpdate()
     {
         textColorOne = cameraOne.GetComponent<Button>().colors;
         textColorTwo = cameraTwo.GetComponent<Button>().colors;
-    }
-    private void FixedUpdate()
-    {
+        
         if (colorDisarm)
         {
             alarmOn.GetComponent<Image>().color = alarmOn.colors.disabledColor;
@@ -37,28 +36,30 @@ public class BoatMenu : MonoBehaviour
             alarmOn.GetComponent<Image>().color = alarmOn.colors.selectedColor;
             if (isRightCam)
             {
+                textColorOne.selectedColor = Color.red;
+                cameraOne.GetComponent<Button>().colors = textColorOne;
                 cameraOne.GetComponent<Image>().color = cameraOne.GetComponent<Button>().colors.selectedColor;
             }else if (!isRightCam)
             {
-                cameraOne.GetComponent<Image>().color = cameraOne.GetComponent<Button>().colors.normalColor;
-                textColorOne.selectedColor = textColorOne.normalColor;
+                textColorOne.selectedColor = Color.blue;
+                cameraOne.GetComponent<Button>().colors = textColorOne;
+                cameraOne.GetComponent<Image>().color = Color.blue;
+                    //cameraOne.GetComponent<Button>().colors.normalColor;
             }
             if (isLeftCam)
             {
+                textColorTwo.selectedColor = Color.red;
+                cameraTwo.GetComponent<Button>().colors = textColorTwo;
                 cameraTwo.GetComponent<Image>().color = cameraTwo.GetComponent<Button>().colors.selectedColor;
             }else if (!isLeftCam)
             {
-                cameraTwo.GetComponent<Image>().color = cameraTwo.GetComponent<Button>().colors.normalColor;
                 textColorTwo.selectedColor = textColorTwo.normalColor;
+                textColorTwo.selectedColor = Color.blue;
+                cameraTwo.GetComponent<Button>().colors = textColorTwo;
+                cameraTwo.GetComponent<Image>().color = Color.blue;
+                    //cameraTwo.GetComponent<Button>().colors.normalColor;
             }
-            if(!isLeftCam && !isRightCam)
-            {
-                colorArm = false;
-                //change img disarm color to original
-                //alarmOn.GetComponent<Image>().color = alarmOn.colors.normalColor;
-                //cameraTwo.SetActive( false );
-                //cameraOne.SetActive( false );
-            }
+
         }
     }
     public void StartBoatSystem()
@@ -89,6 +90,8 @@ public class BoatMenu : MonoBehaviour
         SecurityAlarmTwo.SetActive( false );
         cameraTwo.SetActive( false );
         cameraOne.SetActive( false );
+        isLeftCam = false;
+        isRightCam = false;
         colorDisarm = true;
         colorArm = false;
     }
