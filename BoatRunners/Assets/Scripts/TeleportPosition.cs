@@ -6,18 +6,16 @@ public class TeleportPosition : MonoBehaviour
     [SerializeField]
     public GameObject thisPlayer;
     private bool isTeleported = false;
-    private bool isBoatTeleported = false;
     public GameObject parentObj;
-    private bool processTel = false;
     private void FixedUpdate()
     {
-        if (isTeleported && !isBoatTeleported)
+        if (isTeleported && !BoatOneStatics.isBoatTeleported)
         {
             StartCoroutine( ChangeTelPosCo() );           
         }
-        else if (isBoatTeleported && !isTeleported)
+        else if (BoatOneStatics.isBoatTeleported && !isTeleported)
         {
-            if (parentObj)
+            if (parentObj && thisPlayer)
             {
                 thisPlayer.transform.parent = parentObj.transform;
             }
@@ -26,8 +24,11 @@ public class TeleportPosition : MonoBehaviour
     }
     IEnumerator ChangeTelBoatPosCo()
     {
-        yield return new WaitForSeconds( 2f );
-        thisPlayer.transform.position = new Vector3( thisPlayer.transform.position.x , 3f , thisPlayer.transform.position.z );
+        if (thisPlayer)
+        {
+            yield return new WaitForSeconds( 2f );
+            thisPlayer.transform.position = new Vector3( thisPlayer.transform.position.x , 3f , thisPlayer.transform.position.z );
+        }
     }
     IEnumerator ChangeTelPosCo()
     {
@@ -53,14 +54,14 @@ public class TeleportPosition : MonoBehaviour
     {
         if (thisPlayer)
         {
-            isBoatTeleported = true;
+          BoatOneStatics.isBoatTeleported = true;
         }
     }
     public void PlayerTeleportBoatExit()
     {
         if (thisPlayer)
         {
-            isBoatTeleported = false;
+          BoatOneStatics.isBoatTeleported = false;
         }
     }
 
