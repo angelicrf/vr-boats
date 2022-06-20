@@ -4,15 +4,21 @@ public class TurnOnLights : MonoBehaviour
 {
     public GameObject lightOne;
     public GameObject lightTwo;
-    private void OnTriggerEnter(Collider other)
+    public void TurnOnLightsBoatOne()
     {
-        if (other.CompareTag( "Hand" ))
+        if (lightOne && lightTwo)
         {
-            Debug.Log( "lighton" );
-            if (lightOne && lightTwo)
+            if (!BoatOneStatics.isLightOn)
             {
                 lightOne.GetComponent<Light>().intensity = 40f;
                 lightTwo.GetComponent<Light>().intensity = 40f;
+                BoatOneStatics.isLightOn = true;
+            }
+            else
+            {
+                BoatOneStatics.isLightOn = false;
+                lightOne.GetComponent<Light>().intensity = 0;
+                lightTwo.GetComponent<Light>().intensity = 0;
             }
         }
     }

@@ -7,7 +7,7 @@ public class TeleportPosition : MonoBehaviour
     public GameObject thisPlayer;
     private bool isTeleported = false;
     private bool isBoatTeleported = false;
-    
+    public GameObject parentObj;
     private bool processTel = false;
     private void FixedUpdate()
     {
@@ -17,6 +17,10 @@ public class TeleportPosition : MonoBehaviour
         }
         else if (isBoatTeleported && !isTeleported)
         {
+            if (parentObj)
+            {
+                thisPlayer.transform.parent = parentObj.transform;
+            }
             StartCoroutine( ChangeTelBoatPosCo() );
         }
     }

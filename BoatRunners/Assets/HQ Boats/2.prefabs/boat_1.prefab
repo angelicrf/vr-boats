@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 426210525}
   - component: {fileID: 426210529}
   - component: {fileID: 426210528}
-  - component: {fileID: 426210526}
   m_Layer: 0
   m_Name: OffBtn
   m_TagString: Untagged
@@ -82,19 +81,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &426210526
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 426210524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e475cf759cd5556439fb1e9a5ee6a14f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  thisBoat: {fileID: 1543479163862836}
 --- !u!1 &1199664842
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,7 +271,6 @@ GameObject:
   - component: {fileID: 1955064517}
   - component: {fileID: 1955064521}
   - component: {fileID: 1955064520}
-  - component: {fileID: 1955064518}
   m_Layer: 0
   m_Name: StartBtn
   m_TagString: Untagged
@@ -356,22 +341,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1955064518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1955064516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a6ec6282a926614492106f41e852d4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  thisBoat: {fileID: 1543479163862836}
-  windmill: {fileID: 0}
-  lightOne: {fileID: 0}
-  lightTwo: {fileID: 0}
 --- !u!1 &1031542201060876
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,6 +450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisBoat: {fileID: 1543479163862836}
+  thisJS: {fileID: 0}
   speed: 10
 --- !u!1 &1543479163862836
 GameObject:

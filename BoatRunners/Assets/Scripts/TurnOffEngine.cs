@@ -1,19 +1,14 @@
-using System.ComponentModel;
 using UnityEngine;
 
 public class TurnOffEngine : MonoBehaviour
 {
     public GameObject thisBoat;
-
-    private void OnTriggerEnter(Collider other)
+    public void TurnOffEngineBoatOne()
     {
-        if (other.CompareTag("Hand"))
+        if (thisBoat)
         {
-            if (thisBoat)
-            {
-                Debug.Log( "stoped" );
-                BoatOneStatics.isStoped = true;
-            }
+            Debug.Log( "stoped" );
+            BoatOneStatics.isStoped = true;
         }
     }
 }

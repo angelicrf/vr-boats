@@ -20,7 +20,7 @@ public class TurnOnEngine : MonoBehaviour
     {
         if (isDriving)
         {         
-            if (!BoatOneStatics.isStoped && windmill && !BoatOneStatics.isLightOn)
+            if (!BoatOneStatics.isStoped && windmill)
                {
                 StartCoroutine( RunEngingCo() );       
             }
@@ -31,24 +31,23 @@ public class TurnOnEngine : MonoBehaviour
         //thisPlayer.transform.parent = thisBoat.transform;
         windmill.transform.RotateAround( windmill.transform.position , windmill.transform.forward , Random.Range( 0 , 360 ) );
         yield return new WaitForSeconds( 2f );
-        if (lightOne && lightTwo)
+        if (!BoatOneStatics.isLightOn)
         {
-            lightOne.GetComponent<Light>().intensity = 40f;
-            lightTwo.GetComponent<Light>().intensity = 40f;
+            if (lightOne && lightTwo)
+            {
+                lightOne.GetComponent<Light>().intensity = 40f;
+                lightTwo.GetComponent<Light>().intensity = 40f;
+            }
         }
         //thisBoat.transform.position += thisBoat.transform.forward * Time.deltaTime * speed;
         yield return null;
     }
-    private void OnTriggerEnter(Collider other)
+    public void TurnOnBoatOneEngine()
     {
-        Debug.Log( "start" );
-        if (other.CompareTag( "Hand" ))
+        if (thisBoat)
         {
-            if (thisBoat)
-            {
-                BoatOneStatics.isStoped = false;
-                isDriving = true;
-            }
+            BoatOneStatics.isStoped = false;
+            isDriving = true;
         }
     }
 }
