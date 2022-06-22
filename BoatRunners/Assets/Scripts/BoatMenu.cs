@@ -1,9 +1,17 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BoatMenu : MonoBehaviour
 {
     public GameObject mainMenu;
+    public GameObject timeMenu;
+    public GameObject temprMenu;
+    public GameObject fuelMenu;
+    public GameObject borderMenu;
+    public GameObject timeImg;
+    public GameObject temprImg;
+    public GameObject fuelImg;
     public GameObject displayMenu;
     public GameObject gpsMap;
     public GameObject spotLight;
@@ -39,9 +47,10 @@ public class BoatMenu : MonoBehaviour
     public GameObject alarm;
     public GameObject cameraOne;
     public GameObject cameraTwo;
+    //
+    public GameObject radarDevice;
     public Button alarmOn;
     public Button alarmOff;
-    //
     public Button spotLightOn;
     public Button spotLightOff;
     public Button radarOn;
@@ -177,6 +186,7 @@ public class BoatMenu : MonoBehaviour
 
     private void FixedUpdate()
     {
+        timeMenu.GetComponent<Text>().text = DateTime.Now.ToString("HH:mm");
         textColorOne = cameraOne.GetComponent<Button>().colors;
         textColorTwo = cameraTwo.GetComponent<Button>().colors;
 
@@ -279,11 +289,19 @@ public class BoatMenu : MonoBehaviour
     {
         colorRadar = true;
         colorDRadar = false;
+        if (radarDevice)
+        {
+            radarDevice.SetActive(true);
+        }
     }
     public void RadarSystemOff()
     {
         colorDRadar = true;
         colorRadar = false;
+        if (radarDevice)
+        {
+            radarDevice.SetActive(false);
+        }
     }
     public void FogSystemOn()
     {
@@ -570,6 +588,13 @@ public class BoatMenu : MonoBehaviour
     public void StartBoatSystem()
     {
         mainMenu.SetActive( false );
+        timeMenu.SetActive(false);
+        temprMenu.SetActive(false);
+        fuelMenu.SetActive(false);
+        borderMenu.SetActive(false);
+        fuelImg.SetActive(false);
+        timeImg.SetActive(false);
+        temprImg.SetActive(false);
         displayMenu.SetActive( true );
     }
     public void StartAlarmSystem()
