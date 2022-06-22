@@ -9,4 +9,6 @@ public static class BoatOneStatics
     public static bool isLightOn { get; set; }
     [DefaultValue( false )]
     public static bool isBoatTeleported { get; set; }
+    [DefaultValue(false)]
+    public static bool isInBoatOne { get; set; }
 }

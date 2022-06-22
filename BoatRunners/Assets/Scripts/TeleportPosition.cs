@@ -11,6 +11,9 @@ public class TeleportPosition : MonoBehaviour
     {
         if (isTeleported && !BoatOneStatics.isBoatTeleported)
         {
+            BoatOneStatics.isInBoatOne = false;
+            BoatOneStatics.isSat = false;
+            thisPlayer.transform.parent = null; 
             StartCoroutine( ChangeTelPosCo() );           
         }
         else if (BoatOneStatics.isBoatTeleported && !isTeleported)
@@ -18,6 +21,8 @@ public class TeleportPosition : MonoBehaviour
             if (parentObj && thisPlayer)
             {
                 thisPlayer.transform.parent = parentObj.transform;
+                BoatOneStatics.isInBoatOne = true;
+                BoatOneStatics.isSat = false;
             }
             StartCoroutine( ChangeTelBoatPosCo() );
         }
