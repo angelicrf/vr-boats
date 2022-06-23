@@ -8,6 +8,7 @@ public class BoatMenu : MonoBehaviour
     public GameObject timeMenu;
     public GameObject temprMenu;
     public GameObject userInput;
+    public GameObject userInputSM;
     public GameObject fuelMenu;
     public GameObject borderMenu;
     public GameObject timeImg;
@@ -48,6 +49,7 @@ public class BoatMenu : MonoBehaviour
     public GameObject alarm;
     public GameObject cameraOne;
     public GameObject cameraTwo;
+    public GameObject tempSm;
     //
     public GameObject radarDevice;
     public Button alarmOn;
@@ -116,6 +118,12 @@ public class BoatMenu : MonoBehaviour
     public GameObject SecurityAlarmOne;
     public GameObject SecurityAlarmTwo;
 
+    public Text tmpCitySm;
+    public Text tmpDescSm;
+    public Text tmpMinSm;
+    public Text tmpMaxSm;
+    public Text tmpDateSm;
+
     private bool colorArm = false;
     private bool colorDisarm = false;
     //
@@ -183,6 +191,7 @@ public class BoatMenu : MonoBehaviour
     private bool isLeftCam = false;
     private bool isRightCam = false;
     private bool isTmpIcon = false;
+    private bool isTempCity = false;
     private ColorBlock textColorOne;
     private ColorBlock textColorTwo;
 
@@ -230,6 +239,14 @@ public class BoatMenu : MonoBehaviour
                 //cameraTwo.GetComponent<Button>().colors.normalColor;
             }
 
+        }
+        if (isTempCity)
+        {
+            tmpCitySm.GetComponent<Text>().text = BoatOneStatics.city;
+            tmpMinSm.GetComponent<Text>().text = BoatOneStatics.tempMin;
+            tmpMaxSm.GetComponent<Text>().text = BoatOneStatics.tempMax;
+            tmpDescSm.GetComponent<Text>().text = BoatOneStatics.descriptionW;
+            tmpDateSm.GetComponent<Text>().text = BoatOneStatics.dateW;
         }
         ActivateSystem(colorSpotLight, colorDSpotLight, spotLightOn, spotLightOff);
         ActivateSystem(colorSpotLight, colorDSpotLight, spotLightOn, spotLightOff);
@@ -293,6 +310,18 @@ public class BoatMenu : MonoBehaviour
           
         }
     }
+    public void GetUserInputValueSM()
+    {
+        if (userInput)
+        {
+            var inputText = userInputSM.GetComponent<InputField>().text;
+                BoatOneStatics.cityName = inputText;
+                if (BoatOneStatics.cityName != null && BoatOneStatics.cityName != "")
+                {
+                    APIAccess.GetWeatherDataAsync();
+                }
+        }
+    }
     public void TemPerIconClick()
     {
         isTmpIcon = !isTmpIcon;
@@ -301,7 +330,9 @@ public class BoatMenu : MonoBehaviour
             if (isTmpIcon)
             {
                 userInput.SetActive(true);
-            }else if (!isTmpIcon)
+ 
+            }
+            else if (!isTmpIcon)
             {
                 userInput.SetActive(false);
             }
@@ -635,6 +666,12 @@ public class BoatMenu : MonoBehaviour
     {
         mainMenu.SetActive(false);
         alarm.SetActive(true);
+    }
+    public void TempSystem()
+    {
+        mainMenu.SetActive(false);
+        tempSm.SetActive(true);
+        isTempCity = true;
     }
     public void StartBoatGPSSystem()
     {
