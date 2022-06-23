@@ -16,6 +16,12 @@ public class SteerBoatOne : MonoBehaviour
     {
         isTurning = false;
         isNotTurning = false;
+
+        //all tested succeed
+        //APIAccess.GetUserMapDirectionLocation();
+        //APIAccess.GetUserMapStaticLocation();
+        //APIAccess.PostUserLocation();
+
         APIAccess.GetWeatherDataAsync();
     }
     private void FixedUpdate()
