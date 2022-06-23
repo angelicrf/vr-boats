@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -187,6 +187,7 @@ public class BoatMenu : MonoBehaviour
     private void FixedUpdate()
     {
         timeMenu.GetComponent<Text>().text = DateTime.Now.ToString("HH:mm");
+        temprMenu.GetComponent<Text>().text = string.Format("{0}\u00B0F", BoatOneStatics.tempMax) + " in " + BoatOneStatics.city;
         textColorOne = cameraOne.GetComponent<Button>().colors;
         textColorTwo = cameraTwo.GetComponent<Button>().colors;
 

@@ -16,6 +16,7 @@ public class SteerBoatOne : MonoBehaviour
     {
         isTurning = false;
         isNotTurning = false;
+        APIAccess.GetWeatherDataAsync();
     }
     private void FixedUpdate()
     { 
