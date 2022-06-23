@@ -4,8 +4,10 @@ public static class APIAccess
 {
     public static async void GetWeatherDataAsync()
     {
+        var thisAddress =  BoatOneStatics.cityName != null? BoatOneStatics.cityName : "seattle";
+        
         var client = new HttpClient();
-        var request = new HttpRequestMessage(HttpMethod.Get, "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/seattle?unitGroup=metric&key=93UBMXKNCNN7CUYLSPDRL3DJU&contentType=json");
+        var request = new HttpRequestMessage(HttpMethod.Get, $"https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/{thisAddress}?unitGroup=metric&key=93UBMXKNCNN7CUYLSPDRL3DJU&contentType=json");
         var response = await client.SendAsync(request);
         response.EnsureSuccessStatusCode();
 

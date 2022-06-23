@@ -16,4 +16,5 @@ public static class BoatOneStatics
     public static string descriptionW { get; set; }
     public static string tempMin { get; set; }
     public static string tempMax { get; set; }
+    public static string cityName { get; set; }
 }

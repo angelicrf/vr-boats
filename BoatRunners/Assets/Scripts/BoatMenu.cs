@@ -7,6 +7,7 @@ public class BoatMenu : MonoBehaviour
     public GameObject mainMenu;
     public GameObject timeMenu;
     public GameObject temprMenu;
+    public GameObject userInput;
     public GameObject fuelMenu;
     public GameObject borderMenu;
     public GameObject timeImg;
@@ -181,6 +182,7 @@ public class BoatMenu : MonoBehaviour
     //
     private bool isLeftCam = false;
     private bool isRightCam = false;
+    private bool isTmpIcon = false;
     private ColorBlock textColorOne;
     private ColorBlock textColorTwo;
 
@@ -273,6 +275,36 @@ public class BoatMenu : MonoBehaviour
             thisBtnOff.GetComponent<Image>().color = Color.red;
             thisBtnOn.GetComponent<Image>().color = Color.gray;
 
+        }
+    }
+    public void GetUserInputValue()
+    {
+        if (userInput)
+        {
+            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+            {
+               BoatOneStatics.cityName = userInput.GetComponent<InputField>().text;
+                if (BoatOneStatics.cityName != null)
+                {
+                    APIAccess.GetWeatherDataAsync();
+                    userInput.SetActive(false);
+                }
+            }
+          
+        }
+    }
+    public void TemPerIconClick()
+    {
+        isTmpIcon = !isTmpIcon;
+        if (userInput)
+        {
+            if (isTmpIcon)
+            {
+                userInput.SetActive(true);
+            }else if (!isTmpIcon)
+            {
+                userInput.SetActive(false);
+            }
         }
     }
     public void SpotLightSystemOn()
@@ -596,6 +628,7 @@ public class BoatMenu : MonoBehaviour
         fuelImg.SetActive(false);
         timeImg.SetActive(false);
         temprImg.SetActive(false);
+        userInput.SetActive(false);
         displayMenu.SetActive( true );
     }
     public void StartAlarmSystem()
