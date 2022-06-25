@@ -50,6 +50,7 @@ public class BoatMenu : MonoBehaviour
     public GameObject cameraOne;
     public GameObject cameraTwo;
     public GameObject tempSm;
+    public GameObject globNav;
     //
     public GameObject radarDevice;
     public Button alarmOn;
@@ -672,6 +673,11 @@ public class BoatMenu : MonoBehaviour
         mainMenu.SetActive(false);
         tempSm.SetActive(true);
         isTempCity = true;
+    }
+    public void GlobNavSystem()
+    {
+        displayMenu.SetActive(false);
+        globNav.SetActive(true);
     }
     public void StartBoatGPSSystem()
     {

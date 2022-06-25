@@ -9,7 +9,6 @@ public class SteerBoatOne : MonoBehaviour
     public GameObject thisJS;
     private bool isTurning;
     private bool isNotTurning;
-    private Vector2 primaryBtnValue;
     private Quaternion prevValueRot;
     public float speed;
     private void Start()
@@ -21,7 +20,6 @@ public class SteerBoatOne : MonoBehaviour
         //APIAccess.GetUserMapDirectionLocation();
         //APIAccess.GetUserMapStaticLocation();
         //APIAccess.PostUserLocation();
-
         APIAccess.GetWeatherDataAsync();
     }
     private void FixedUpdate()
