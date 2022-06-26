@@ -6,7 +6,9 @@ using UnityEngine.UI;
 
 public class KeyBoardSM : MonoBehaviour
 {
+    public GameObject thisKeyboard;
     public GameObject thisInput;
+
     private string thisText;
     private int thisInt;
     private bool isEntered;
@@ -54,9 +56,7 @@ public class KeyBoardSM : MonoBehaviour
     private bool isDash;
     private bool isNumberSign;
     private bool isBackSpace;
-    private bool isKeptPrev;
     private int prevBackSpace;
-    //back  arrows numbers comma dash numbersign
     private List<char> thisList;
     char thisChar;
     void Start()
@@ -110,10 +110,7 @@ public class KeyBoardSM : MonoBehaviour
          isDash = false;
          isNumberSign = false;
          isBackSpace = false;
-         isKeptPrev = false;
          thisList = new List<char>();
-
-         isEntered = false;
         if (thisInput)
         {
             thisText = thisInput.GetComponent<InputField>().text;
@@ -123,19 +120,20 @@ public class KeyBoardSM : MonoBehaviour
     }
     private void FixedUpdate()
     {
+
         if (EventSystem.current.currentSelectedGameObject != null)
         {
             if (EventSystem.current.currentSelectedGameObject.name == "KBIN")
             {
+                thisKeyboard.SetActive(true);
                 prevBackSpace = thisInput.GetComponent<InputField>().caretPosition;
-                Debug.Log(prevBackSpace);
             }
         }
         if (prevBackSpace != 0)
         {
             if (isBackSpace)
             {
-                thisList.RemoveAt(prevBackSpace -1);
+                thisList.RemoveAt(prevBackSpace - 1);
                 thisInput.GetComponent<InputField>().text = new string(thisList.ToArray());
                 thisText = thisInput.GetComponent<InputField>().text;
                 isBackSpace = false;
@@ -144,174 +142,217 @@ public class KeyBoardSM : MonoBehaviour
     }
     public void BtnSpaceClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isSpace = true;
     }
     public void BtnBackSpaceClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isBackSpace = true;
     }
     public void BtnNSClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isNumberSign = true;
     }
     public void BtnCommaClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isComma = true;
     }
     public void BtnDotClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isDot = true;
     }
     public void BtnSlashClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isSlash = true;
     }
     public void BtnDasheClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isDash = true;
     }
     public void Btn1Click()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         is1 = true;
     }
     public void Btn2Click()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         is2 = true;
     }
     public void Btn3Click()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         is3 = true;
     }
     public void Btn4Click()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         is4 = true;
     }
     public void Btn5Click()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         is5 = true;
     }
     public void Btn6Click()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         is6 = true;
     }
     public void Btn7Click()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         is7 = true;
     }
     public void Btn8Click()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         is8 = true;
     }
     public void Btn9Click()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         is9 = true;
     }
     public void Btn0Click()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         is0 = true;
     }
     public void BtnAClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isA = true;
     }
     public void BtnBClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isB = true;
     }
     public void BtnCClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isC = true;
     }
     public void BtnDClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isD = true;
     }
     public void BtnEClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isE = true;
     }
     public void BtnFClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isF = true;
     }
     public void BtnGClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isG = true;
     }
     public void BtnHClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isH = true;
     }
     public void BtnIClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isI = true;
     }
     public void BtnKClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isK = true;
     }
     public void BtnJClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isJ = true;
     }
     public void BtnLClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isL = true;
     }
     public void BtnMClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isM = true;
     }
     public void BtnNClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isN = true;
     }
     public void BtnOClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isO = true;
     }
     public void BtnPClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isP = true;
     }
     public void BtnQClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isQ = true;
     }
     public void BtnRClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isR = true;
     }
     public void BtnSClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isS = true;
     }
     public void BtnTClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isT = true;
     }
     public void BtnWClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isW = true;
     }
     public void BtnXClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isX = true;
     }
     public void BtnYClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isY = true;
     }
     public void BtnZClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isZ = true;
     }
     public void BtnUClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isU = true;
     }
     public void BtnVClick()
     {
+        BoatOneStatics.iskeyBoardUsed = true;
         isV = true;
     }
     public void AllBtnsClick()
@@ -577,16 +618,10 @@ public class KeyBoardSM : MonoBehaviour
     }
     public void BtnEnterClick()
     {
-        isEntered = true;
-        thisInput.GetComponent<InputField>().Select();
+       thisInput.GetComponent<InputField>().Select();
     }
     public void EndOnChange()
     {
-        Debug.Log(isEntered);
-        if (isEntered)
-        {
-            thisInput.GetComponent<InputField>().text = thisText;
-            isEntered = false;
-        }
+        thisInput.GetComponent<InputField>().text = thisText;
     }
 }

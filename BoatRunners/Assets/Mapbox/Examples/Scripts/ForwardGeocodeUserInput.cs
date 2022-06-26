@@ -13,11 +13,13 @@ namespace Mapbox.Examples
 	using Mapbox.Geocoding;
 	using Mapbox.Utils;
 
+
 	[RequireComponent(typeof(InputField))]
+
 	public class ForwardGeocodeUserInput : MonoBehaviour
 	{
-		InputField _inputField;
-
+		public InputField _inputField;
+		public GameObject thisKeyboard;
 		ForwardGeocodeResource _resource;
 
 		Vector2d _coordinate;
@@ -43,14 +45,21 @@ namespace Mapbox.Examples
 		public event Action<ForwardGeocodeResponse> OnGeocoderResponse = delegate { };
 
 		void Awake()
-		{
+		{	
 			_inputField = GetComponent<InputField>();
 			_inputField.onEndEdit.AddListener(HandleUserInput);
 			_resource = new ForwardGeocodeResource("");
 		}
-
-		void HandleUserInput(string searchString)
+        //private void FixedUpdate()
+        //{
+        //    if (!BoatOneStatics.iskeyBoardUsed)
+        //    {
+        //        _inputField.onEndEdit.AddListener(HandleUserInput);
+        //    }
+        //}
+        void HandleUserInput(string searchString)
 		{
+			Debug.Log("searchingstr " + searchString);
 			_hasResponse = false;
 			if (!string.IsNullOrEmpty(searchString))
 			{
@@ -73,6 +82,7 @@ namespace Mapbox.Examples
 			}
 			Response = res;
 			OnGeocoderResponse(res);
+			thisKeyboard.SetActive(false);
 		}
 	}
 }

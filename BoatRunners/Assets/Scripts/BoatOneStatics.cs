@@ -17,4 +17,6 @@ public static class BoatOneStatics
     public static string tempMin { get; set; }
     public static string tempMax { get; set; }
     public static string cityName { get; set; }
+    [DefaultValue(false)]
+    public static bool iskeyBoardUsed { get; set; }
 }
