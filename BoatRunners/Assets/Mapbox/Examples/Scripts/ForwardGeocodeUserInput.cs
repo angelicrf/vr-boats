@@ -47,16 +47,16 @@ namespace Mapbox.Examples
 		void Awake()
 		{	
 			_inputField = GetComponent<InputField>();
-			_inputField.onEndEdit.AddListener(HandleUserInput);
 			_resource = new ForwardGeocodeResource("");
 		}
-        //private void FixedUpdate()
-        //{
-        //    if (!BoatOneStatics.iskeyBoardUsed)
-        //    {
-        //        _inputField.onEndEdit.AddListener(HandleUserInput);
-        //    }
-        //}
+        private void FixedUpdate()
+        {
+            if (BoatOneStatics.iskeyBoardUsed)
+            {
+                _inputField.onEndEdit.AddListener(HandleUserInput);
+				BoatOneStatics.iskeyBoardUsed = false;
+			}
+        }
         void HandleUserInput(string searchString)
 		{
 			Debug.Log("searchingstr " + searchString);

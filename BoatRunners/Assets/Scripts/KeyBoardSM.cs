@@ -1,9 +1,9 @@
+using System;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
+using WindowsInput;
 public class KeyBoardSM : MonoBehaviour
 {
     public GameObject thisKeyboard;
@@ -58,570 +58,687 @@ public class KeyBoardSM : MonoBehaviour
     private bool isBackSpace;
     private int prevBackSpace;
     private List<char> thisList;
-    char thisChar;
+    private string testText;
+    InputSimulator IS;
+
     void Start()
     {
         thisText = "";
-        thisChar = ' ';
         thisInt = 0;
         isSpace = false;
         isB = false;
         isA = false;
         isC = false;
         isD = false;
-         isE = false;
-         isF = false;
-         isG = false;
-         isH = false;
-         isI = false;
-         isJ = false;
-         isK = false;
-         isL = false;
-         isM = false;
-         isN = false;
-         isO = false;
-         isP = false;
-         isQ = false;
-         isR = false;
-         isS = false;
-         isT = false;
-         isW = false;
-         isX = false;
-         isY = false;
-         isZ = false;
-         isU = false;
-         isV = false;
+        isE = false;
+        isF = false;
+        isG = false;
+        isH = false;
+        isI = false;
+        isJ = false;
+        isK = false;
+        isL = false;
+        isM = false;
+        isN = false;
+        isO = false;
+        isP = false;
+        isQ = false;
+        isR = false;
+        isS = false;
+        isT = false;
+        isW = false;
+        isX = false;
+        isY = false;
+        isZ = false;
+        isU = false;
+        isV = false;
 
-         is1 = false;;
-         is2 = false;
-         is3 = false;
-         is4 = false;
-         is5 = false;
-         is6 = false;
-         is7 = false;
-         is8 = false;
-         is9 = false;
-         is0 = false;
+        is1 = false; ;
+        is2 = false;
+        is3 = false;
+        is4 = false;
+        is5 = false;
+        is6 = false;
+        is7 = false;
+        is8 = false;
+        is9 = false;
+        is0 = false;
+        testText = "";
+        isSpace = false;
+        isComma = false;
+        isDot = false;
+        isSlash = false;
+        isDash = false;
+        isNumberSign = false;
+        isBackSpace = false;
+        thisList = new List<char>();
+        IS = new InputSimulator();
 
-         isSpace = false;
-         isComma = false;
-         isDot = false;
-         isSlash = false;
-         isDash = false;
-         isNumberSign = false;
-         isBackSpace = false;
-         thisList = new List<char>();
         if (thisInput)
         {
             thisText = thisInput.GetComponent<InputField>().text;
             thisInt = thisInput.GetComponent<InputField>().caretPosition;
-            
-        }
-    }
-    private void FixedUpdate()
-    {
 
+        }
+        thisInput.GetComponent<InputField>().ActivateInputField();
+    }
+
+    private void LateUpdate()
+    {
+        //thisInput.GetComponent<InputField>().Select();
+        thisInput.GetComponent<InputField>().ActivateInputField();
         if (EventSystem.current.currentSelectedGameObject != null)
         {
             if (EventSystem.current.currentSelectedGameObject.name == "KBIN")
             {
                 thisKeyboard.SetActive(true);
-                prevBackSpace = thisInput.GetComponent<InputField>().caretPosition;
-            }
+            } 
         }
-        if (prevBackSpace != 0)
-        {
+            //if (EventSystem.current.currentSelectedGameObject != null)
+            //{
+            //    if (EventSystem.current.currentSelectedGameObject.name == "KBIN")
+            //    {
+            //        thisKeyboard.SetActive(true);
+            //        prevBackSpace = thisInput.GetComponent<InputField>().caretPosition;
+            //    }
+            //}
+            //if (prevBackSpace != 0)
+            //{
+            //    if (isBackSpace)
+            //    {
+            //        thisList.RemoveAt(prevBackSpace - 1);
+            //        thisInput.GetComponent<InputField>().text = new string(thisList.ToArray());
+            //        thisText = thisInput.GetComponent<InputField>().text;
+            //        isBackSpace = false;
+            //    }
+            //}    
             if (isBackSpace)
-            {
-                thisList.RemoveAt(prevBackSpace - 1);
-                thisInput.GetComponent<InputField>().text = new string(thisList.ToArray());
-                thisText = thisInput.GetComponent<InputField>().text;
-                isBackSpace = false;
-            }
+        {
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.BACK);
+            //thisList.RemoveAt(thisText.Length - 1);
+            //thisInput.GetComponent<InputField>().text = new string(thisList.ToArray());
+            //thisText = thisInput.GetComponent<InputField>().text;
+            isBackSpace = false;
+        }
+
+    }
+
+    private void SimulateTypedText(string text)
+    {
+        char[] words = text.ToCharArray();
+        foreach (char word in words)
+        {
+            IS.Keyboard.TextEntry(word);
         }
     }
     public void BtnSpaceClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isSpace = true;
     }
     public void BtnBackSpaceClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isBackSpace = true;
     }
     public void BtnNSClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isNumberSign = true;
     }
     public void BtnCommaClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isComma = true;
     }
     public void BtnDotClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isDot = true;
     }
     public void BtnSlashClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isSlash = true;
     }
     public void BtnDasheClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isDash = true;
     }
     public void Btn1Click()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         is1 = true;
     }
     public void Btn2Click()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         is2 = true;
     }
     public void Btn3Click()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         is3 = true;
     }
     public void Btn4Click()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         is4 = true;
     }
     public void Btn5Click()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         is5 = true;
     }
     public void Btn6Click()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         is6 = true;
     }
     public void Btn7Click()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         is7 = true;
     }
     public void Btn8Click()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         is8 = true;
     }
     public void Btn9Click()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         is9 = true;
     }
     public void Btn0Click()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         is0 = true;
     }
     public void BtnAClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isA = true;
     }
     public void BtnBClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isB = true;
     }
     public void BtnCClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isC = true;
     }
     public void BtnDClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isD = true;
     }
     public void BtnEClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isE = true;
     }
     public void BtnFClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isF = true;
     }
     public void BtnGClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isG = true;
     }
     public void BtnHClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isH = true;
     }
     public void BtnIClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isI = true;
     }
     public void BtnKClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isK = true;
     }
     public void BtnJClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isJ = true;
     }
     public void BtnLClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isL = true;
     }
     public void BtnMClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isM = true;
     }
     public void BtnNClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isN = true;
     }
     public void BtnOClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isO = true;
     }
     public void BtnPClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isP = true;
     }
     public void BtnQClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isQ = true;
     }
     public void BtnRClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isR = true;
     }
     public void BtnSClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isS = true;
     }
     public void BtnTClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isT = true;
     }
     public void BtnWClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isW = true;
     }
     public void BtnXClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isX = true;
     }
     public void BtnYClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isY = true;
     }
     public void BtnZClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isZ = true;
     }
     public void BtnUClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isU = true;
     }
     public void BtnVClick()
     {
-        BoatOneStatics.iskeyBoardUsed = true;
         isV = true;
     }
     public void AllBtnsClick()
     {
         if (isA)
         {
-            thisChar = 'a';
-            thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_A);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
+            //thisChar = 'a';
+            //thisList.Add(thisChar);
             isA = false;
         }
         else if (isB)
         {
-            thisChar = 'b';
-            thisList.Add(thisChar);
+            //thisChar = 'b';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_B);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             isB = false;
         }
         else if (isC)
         {
-            thisChar = 'c';
-            thisList.Add(thisChar);
+            //thisChar = 'c';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_C);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             isC = false;
         }
         else if (isD)
         {
-            thisChar = 'd';
-            thisList.Add(thisChar);
+            //thisChar = 'd';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_D);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             isD = false;
         }
         else if (isE)
         {
-            thisChar = 'e';
-            thisList.Add(thisChar);
+            //thisChar = 'e';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_E);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             isE = false;
         }
         else if (isF)
         {
-            thisChar = 'f';
-            thisList.Add(thisChar);
+            //thisChar = 'f';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_F);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             isF = false;
         }
         else if (isG)
         {
-            thisChar = 'g';
-            thisList.Add(thisChar);
+            //thisChar = 'g';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_G);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             isG = false;
         }
         else if (isH)
         {
-            thisChar = 'h';
-            thisList.Add(thisChar);
+            //thisChar = 'h';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_H);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             isH = false;
         }
         else if (isI)
         {
-            thisChar = 'i';
-            thisList.Add(thisChar);
+            //thisChar = 'i';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_I);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             isI = false;
         }
         else if (isJ)
         {
-            thisChar = 'j';
-            thisList.Add(thisChar);
+            //thisChar = 'j';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_J);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             isJ = false;
         }
         else if (isK)
         {
-            thisChar = 'k';
-            thisList.Add(thisChar);
+            //thisChar = 'k';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_K);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             isK = false;
         }
         else if (isL)
         {
-            thisChar = 'l';
-            thisList.Add(thisChar);
+            //thisChar = 'l';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_L);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             isL = false;
         }
         else if (isM)
         {
-            thisChar = 'm';
-            thisList.Add(thisChar);
+            //thisChar = 'm';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_M);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             isM = false;
         }
         else if (isN)
         {
-            thisChar = 'n';
-            thisList.Add(thisChar);
+            //thisChar = 'n';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_N);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             isN = false;
         }
         else if (isO)
         {
-            thisChar = 'o';
-            thisList.Add(thisChar);
+            //thisChar = 'o';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_O);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             isO = false;
         }
         else if (isP)
         {
-            thisChar = 'p';
-            thisList.Add(thisChar);
+            //thisChar = 'p';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_P);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             isP = false;
         }
 
         else if (isQ)
         {
-            thisChar = 'q';
-            thisList.Add(thisChar);
+            //thisChar = 'q';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_Q);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             isQ = false;
         }
         else if (isR)
         {
-            thisChar = 'r';
-            thisList.Add(thisChar);
+            //thisChar = 'r';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_R);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             isR = false;
         }
         else if (isS)
         {
-            thisChar = 's';
-            thisList.Add(thisChar);
+            //thisChar = 's';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_S);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             isS = false;
         }
         else if (isT)
         {
-            thisChar = 't';
-            thisList.Add(thisChar);
+            //thisChar = 't';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_T);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             isT = false;
         }
         else if (isU)
         {
-            thisChar = 'u';
-            thisList.Add(thisChar);
+            //thisChar = 'u';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_U);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             isU = false;
         }
         else if (isV)
         {
-            thisChar = 'v';
-            thisList.Add(thisChar);
+            //thisChar = 'v';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_V);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             isV = false;
         }
         else if (isW)
         {
-            thisChar = 'w';
-            thisList.Add(thisChar);
+            //thisChar = 'w';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_W);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             isW = false;
         }
         else if (isX)
         {
-            thisChar = 'x';
-            thisList.Add(thisChar);
+            //thisChar = 'x';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_X);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             isX = false;
         }
         else if (isY)
         {
-            thisChar = 'y';
-            thisList.Add(thisChar);
+            //thisChar = 'y';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_Y);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             isY = false;
         }
         else if (isZ)
         {
-            thisChar = 'z';
-            thisList.Add(thisChar);
+            //thisChar = 'z';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_Z);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             isZ = false;
         }//numbers
         else if (is0)
         {
-            thisChar = '0';
-            thisList.Add(thisChar);
+            //thisChar = '0';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_0);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             is0 = false;
         }
         else if (is1)
         {
-            thisChar = '1';
-            thisList.Add(thisChar);
+            //thisChar = '1';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_1);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             is1 = false;
         }
         else if (is2)
         {
-            thisChar = '2';
-            thisList.Add(thisChar);
+            //thisChar = '2';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_2);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             is2 = false;
         }
         else if (is3)
         {
-            thisChar = '3';
-            thisList.Add(thisChar);
+            //thisChar = '3';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_3);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             is3 = false;
         }
         else if (is4)
         {
-            thisChar = '4';
-            thisList.Add(thisChar);
+            //thisChar = '4';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_4);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             is4 = false;
         }
         else if (is5)
         {
-            thisChar = '5';
-            thisList.Add(thisChar);
+            //thisChar = '5';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_5);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             is5 = false;
         }
         else if (is6)
         {
-            thisChar = '6';
-            thisList.Add(thisChar);
+            //thisChar = '6';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_6);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             is6 = false;
         }
         else if (is7)
         {
-            thisChar = '7';
-            thisList.Add(thisChar);
+            //thisChar = '7';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_7);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             is7 = false;
         }
         else if (is8)
         {
-            thisChar = '8';
-            thisList.Add(thisChar);
+            //thisChar = '8';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_8);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             is8 = false;
         }
         else if (is9)
         {
-            thisChar = '9';
-            thisList.Add(thisChar);
+            //thisChar = '9';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_9);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             is9 = false;
         }
         else if (isSpace)
         {
-            thisChar = '\u0020';
-            thisList.Add(thisChar);
+            //thisChar = '\u0020';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.SPACE);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             isSpace = false;
         }
         else if (isComma)
         {
-            thisChar = ',';
-            thisList.Add(thisChar);
+            //thisChar = ',';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.OEM_COMMA);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             isComma = false;
         }
         else if (isDot)
         {
-            thisChar = '.';
-            thisList.Add(thisChar);
+            //thisChar = '.';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.OEM_PERIOD);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             isDot = false;
         }
         else if (isSlash)
         {
-            thisChar = '/';
-            thisList.Add(thisChar);
+            //thisChar = '/';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.DIVIDE);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             isSlash = false;
         }
         else if (isDash)
         {
-            thisChar = '-';
-            thisList.Add(thisChar);
+            //thisChar = '-';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.OEM_MINUS);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             isDash = false;
         }
         else if (isNumberSign)
         {
-            thisChar = '#';
-            thisList.Add(thisChar);
+            //thisChar = '#';
+            //thisList.Add(thisChar);
+            thisInput.GetComponent<InputField>().ActivateInputField();
+            IS.Keyboard.ModifiedKeyStroke(WindowsInput.Native.VirtualKeyCode.SHIFT, WindowsInput.Native.VirtualKeyCode.VK_3);
+            thisInput.GetComponent<InputField>().MoveTextEnd(false);
             isNumberSign = false;
         }
-        if (thisList != null && thisList.Count > 0)
-        {
-            thisInput.GetComponent<InputField>().text = new string(thisList.ToArray());
-            thisText = thisInput.GetComponent<InputField>().text;
-        }
+        //if (thisList != null && thisList.Count > 0)
+        //{
+        //    thisInput.GetComponent<InputField>().text = new string(thisList.ToArray());
+        //    thisText = thisInput.GetComponent<InputField>().text;
+        //}
     }
     public void BtnEnterClick()
     {
-       thisInput.GetComponent<InputField>().Select();
+        BoatOneStatics.iskeyBoardUsed = true;
+        thisInput.GetComponent<InputField>().ActivateInputField();
+        IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.RETURN);
     }
     public void EndOnChange()
     {
         thisInput.GetComponent<InputField>().text = thisText;
+        BoatOneStatics.iskeyBoardUsed = false;
     }
 }

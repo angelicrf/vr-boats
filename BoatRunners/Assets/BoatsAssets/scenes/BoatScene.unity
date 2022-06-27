@@ -19598,19 +19598,7 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1771826104}
-        m_TargetAssemblyTypeName: KeyBoardSM, Assembly-CSharp
-        m_MethodName: EndOnChange
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -21162,6 +21150,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64438420d273554448959a35c747f25a, type: 3}
+--- !u!1 &449010172 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 3476d5d1acba0944995a80ebd311a83d, type: 3}
+  m_PrefabInstance: {fileID: 307969071}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &451238032 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 88b977c6c0cb6f347a2b35f97b16cdc4, type: 3}
@@ -92954,8 +92947,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 213bea92ebef7b042b40fea0acf237be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisJS: {fileID: 0}
-  thisBoat: {fileID: 0}
+  thisJS: {fileID: 449010172}
+  thisBoat: {fileID: 158167790}
 --- !u!33 &2633323452696293380
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -94024,8 +94017,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 213bea92ebef7b042b40fea0acf237be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisJS: {fileID: 0}
-  thisBoat: {fileID: 0}
+  thisJS: {fileID: 449010172}
+  thisBoat: {fileID: 158167790}
 --- !u!65 &4756807231035394729
 BoxCollider:
   m_ObjectHideFlags: 0
