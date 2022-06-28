@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -51,6 +52,7 @@ public class BoatMenu : MonoBehaviour
     public GameObject cameraTwo;
     public GameObject tempSm;
     public GameObject globNav;
+    public GameObject fridge;
     //
     public GameObject radarDevice;
     public Button alarmOn;
@@ -115,6 +117,8 @@ public class BoatMenu : MonoBehaviour
     public Button fuelPumpOff;
     public Button freshWPOn;
     public Button freshWPOff;
+    public Button fridgeUp;
+    public Button fridgeDown;
     //
     public GameObject SecurityAlarmOne;
     public GameObject SecurityAlarmTwo;
@@ -127,7 +131,6 @@ public class BoatMenu : MonoBehaviour
 
     private bool colorArm = false;
     private bool colorDisarm = false;
-    //
     private bool colorSpotLight = false;
     private bool colorDSpotLight = false;
     private bool colorRadar = false;
@@ -188,14 +191,18 @@ public class BoatMenu : MonoBehaviour
     private bool colorDfreshW = false;
     private bool colorAC = false;
     private bool colorDAC = false;
-    //
+    private bool colorFr = false;
+    private bool colorDFr = false;
     private bool isLeftCam = false;
     private bool isRightCam = false;
     private bool isTmpIcon = false;
     private bool isTempCity = false;
+    private bool isFrgAnimDone = false;
     private ColorBlock textColorOne;
     private ColorBlock textColorTwo;
-
+    //
+    public GameObject frObject;
+    public Animator frAnim;
     private void FixedUpdate()
     {
         timeMenu.GetComponent<Text>().text = DateTime.Now.ToString("HH:mm");
@@ -249,6 +256,16 @@ public class BoatMenu : MonoBehaviour
             tmpDescSm.GetComponent<Text>().text = BoatOneStatics.descriptionW;
             tmpDateSm.GetComponent<Text>().text = BoatOneStatics.dateW;
         }
+        if (isFrgAnimDone)
+        {
+            if (frAnim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !frAnim.IsInTransition(0))
+            {
+                Debug.Log("animationisDone..");
+                isFrgAnimDone = false;
+                frAnim.StopPlayback();
+                frObject.SetActive(false);
+            }
+        }
         ActivateSystem(colorSpotLight, colorDSpotLight, spotLightOn, spotLightOff);
         ActivateSystem(colorSpotLight, colorDSpotLight, spotLightOn, spotLightOff);
         ActivateSystem(colorRadar, colorDRadar, radarOn, radarOff);
@@ -280,6 +297,8 @@ public class BoatMenu : MonoBehaviour
         ActivateSystem(colorHeatedW, colorDHeatedW, heatedWOn, heatedWOff);
         ActivateSystem(colorFuelPump, colorDFuelPump, fuelPumpOn, fuelPumpOff);
         ActivateSystem(colorFreshW, colorDfreshW, freshWPOn, freshWPOff);
+        //
+        ActivateSystem(colorFr, colorDFr, fridgeUp, fridgeDown);
     }
     private void ActivateSystem(bool isThisOn, bool isThisOff, Button thisBtnOn, Button thisBtnOff)
     {
@@ -397,6 +416,38 @@ public class BoatMenu : MonoBehaviour
     {
         colorDEngine = true;
         colorEngine = false;
+    }
+    public void FridgeSystemOn()
+    {
+        colorFr = true;
+        colorDFr = false;
+
+        if (frAnim && frObject)
+        {
+            StartCoroutine(FridgeActivationCo());
+        }
+    }
+    public void FridgeSystemOff()
+    {
+        colorDFr = true;
+        colorFr = false;
+
+        if (frAnim && frObject)
+        {
+            StartCoroutine(FridgeDiactivationCo());
+        }
+    }
+    private IEnumerator FridgeActivationCo()
+    {
+        frObject.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        frAnim.SetBool("isRfUp", true);
+    }
+    private IEnumerator FridgeDiactivationCo()
+    {
+        frAnim.SetBool("isRfUp", false);
+        yield return new WaitForSeconds(2f);
+        isFrgAnimDone = true;
     }
     public void ShorePowerSystemOn()
     {
@@ -666,7 +717,12 @@ public class BoatMenu : MonoBehaviour
     public void StartAlarmSystem()
     {
         mainMenu.SetActive(false);
-        alarm.SetActive(true);
+        fridge.SetActive(true);
+    }
+    public void FridgeSystem()
+    {
+        mainMenu.SetActive(false);
+        fridge.SetActive(true);
     }
     public void TempSystem()
     {
