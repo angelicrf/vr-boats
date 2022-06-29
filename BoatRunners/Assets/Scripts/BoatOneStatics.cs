@@ -19,4 +19,7 @@ public static class BoatOneStatics
     public static string cityName { get; set; }
     [DefaultValue(false)]
     public static bool iskeyBoardUsed { get; set; }
+    [DefaultValue(false)]
+    public static bool isSpeechDone { get; set; }
+    public static string speechText { get; set; }
 }
