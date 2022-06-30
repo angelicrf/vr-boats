@@ -2,12 +2,16 @@ using UnityEngine;
 
 public class DriverAnimController : MonoBehaviour
 {
-    public Animator driverAnim;
-    void FixedUpdate()
+    private void Awake()
     {
-        if (BoatOneStatics.isSpeechDone)
-        {
-            driverAnim.SetBool("isSitidle", true);
-        }
+        gameObject.GetComponent<Animator>().SetBool("isSitidle", true);
     }
+    //void FixedUpdate()
+    //{
+
+    //    if (BoatOneStatics.isSpeechDone)
+    //    {
+    //        other funstionality
+    //    }
+    //}
 }
