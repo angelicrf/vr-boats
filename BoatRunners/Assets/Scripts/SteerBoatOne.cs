@@ -20,7 +20,7 @@ public class SteerBoatOne : MonoBehaviour
         //APIAccess.GetUserMapDirectionLocation();
         //APIAccess.GetUserMapStaticLocation();
         //APIAccess.PostUserLocation();
-        //APIAccess.GetWeatherDataAsync();
+        APIAccess.GetWeatherDataAsync();
     }
     private void FixedUpdate()
     { 
