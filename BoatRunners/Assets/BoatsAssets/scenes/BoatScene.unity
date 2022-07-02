@@ -52991,6 +52991,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Keywords:
   - hello
+  - yes
+  - ya
 --- !u!1 &1175700311
 GameObject:
   m_ObjectHideFlags: 0
@@ -53853,9 +53855,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 68e7c1e2c227b364eac1c2649e0599d5, type: 2}
     - target: {fileID: 5866666021909216657, guid: 47873f1f9aa9405478436d96c450b114, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 47873f1f9aa9405478436d96c450b114, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 9fa9bfd075e5e8e4ab27a650caca1960, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 47873f1f9aa9405478436d96c450b114, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47873f1f9aa9405478436d96c450b114, type: 3}
 --- !u!1 &1195956783
@@ -65581,6 +65591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58824f8071df8f74b8dc41353e793181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  greetingDialog: {fileID: 8300000, guid: 58ed5981c9c5f7940b88f808800aa031, type: 3}
 --- !u!1 &1500425330
 GameObject:
   m_ObjectHideFlags: 0
