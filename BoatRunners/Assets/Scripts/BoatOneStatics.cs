@@ -22,4 +22,6 @@ public static class BoatOneStatics
     [DefaultValue(false)]
     public static bool isSpeechDone { get; set; }
     public static string speechText { get; set; }
+    [DefaultValue(false)]
+    public static bool isAtBoatOne { get; set; }
 }
