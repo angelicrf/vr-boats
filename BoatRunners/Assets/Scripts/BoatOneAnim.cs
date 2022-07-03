@@ -39,99 +39,98 @@ public class BoatOneAnim : MonoBehaviour
     {
         if (!isStoppedOne)
         {
-            StartCoroutine(BoatMovePath(targetObject1,  0, 1));
+            BoatMovePath(targetObject1,  0, 1);
         }
         else if (isStoppedTwo)
         {
-            StartCoroutine(BoatMovePath(targetObject2, 1, 0));
+            BoatMovePath(targetObject2, 1, 0);
         }
         else if (isStoppedThree)
         {
-            StartCoroutine(BoatMovePath(targetObject3,  0, -1));
+            BoatMovePath(targetObject3,  0, -1);
         }
         else if (isStoppedFour)
         {
-            StartCoroutine(BoatMovePath(targetObject4, 1, -1));
+            BoatMovePath(targetObject4, 1, -1);
         }
         else if (isStoppedFive)
         {
-            StartCoroutine(BoatMovePath(targetObject5, -1, -1));
+            BoatMovePath(targetObject5, -1, -1);
         }
         else if (isStoppedSix)
         {
-            StartCoroutine(BoatMovePath(targetObject6, 0, 1));
+           BoatMovePath(targetObject6, 0, 1);
         }
         else if (isStoppedSeven)
         {
-          StartCoroutine(BoatMovePath(targetObject7, -1, 0));
+          BoatMovePath(targetObject7, -1, 0);
         }
 
     }
-    private IEnumerator BoatMovePath(GameObject thisobj, float thisX, float thisY)
+    private void BoatMovePath(GameObject thisobj, float thisX, float thisY)
     {
         if (thisobj)
         {
-            if (!isFirstTime)
+            if (BoatOneStatics.isDriveBoatOne)
             {
-                yield return new WaitForSeconds(12f);
-                isFirstTime = true;
-            }
+                var speedST = speed * Time.deltaTime;
+                transform.position = Vector3.MoveTowards(transform.position, thisobj.transform.position, speedST);
 
-            var speedST = speed * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, thisobj.transform.position, speedST);
-            
-            if (Vector3.Distance(transform.position,thisobj.transform.position) < 0.001f)
-            {
-                if (!gameObject.GetComponent<Animator>().enabled)
+                if (Vector3.Distance(transform.position, thisobj.transform.position) < 0.001f)
                 {
-                    gameObject.GetComponent<Animator>().enabled = true;
-                    if (gameObject.GetComponent<Animator>().enabled && !gameObject.GetComponent<Animator>().GetBool("isBtDrive"))
+                    if (!gameObject.GetComponent<Animator>().enabled)
                     {
-                        gameObject.GetComponent<Animator>().SetBool("isBtDrive", true);
+                        gameObject.GetComponent<Animator>().enabled = true;
+                        if (gameObject.GetComponent<Animator>().enabled && !gameObject.GetComponent<Animator>().GetBool("isBtDrive"))
+                        {
+                            gameObject.GetComponent<Animator>().SetBool("isBtDrive", true);
+                        }
                     }
-                }
-                else if (gameObject.GetComponent<Animator>().enabled && gameObject.GetComponent<Animator>().GetBool("isBtDrive"))
-                {
-                    gameObject.GetComponent<Animator>().SetFloat("VelocityX", thisX);
-                    gameObject.GetComponent<Animator>().SetFloat("VelocityY", thisY);
-                    if (gameObject.GetComponent<Animator>().GetBool("isBtDrive") && gameObject.GetComponent<Animator>().GetFloat("VelocityX") == thisX && gameObject.GetComponent<Animator>().GetFloat("VelocityY") == thisY)
+                    else if (gameObject.GetComponent<Animator>().enabled && gameObject.GetComponent<Animator>().GetBool("isBtDrive"))
                     {
-                        if (!isStoppedOne && !isStoppedTwo)
+                        gameObject.GetComponent<Animator>().SetFloat("VelocityX", thisX);
+                        gameObject.GetComponent<Animator>().SetFloat("VelocityY", thisY);
+                        if (gameObject.GetComponent<Animator>().GetBool("isBtDrive") && gameObject.GetComponent<Animator>().GetFloat("VelocityX") == thisX && gameObject.GetComponent<Animator>().GetFloat("VelocityY") == thisY)
                         {
-                            isStoppedOne = true;
-                            isStoppedTwo = true;
-                        }
-                        else if (isStoppedTwo && !isStoppedThree)
-                        {
-                            isStoppedTwo = false;
-                            isStoppedThree = true;
-                        }
+                            if (!isStoppedOne && !isStoppedTwo)
+                            {
+                                isStoppedOne = true;
+                                isStoppedTwo = true;
+                            }
+                            else if (isStoppedTwo && !isStoppedThree)
+                            {
+                                isStoppedTwo = false;
+                                isStoppedThree = true;
+                            }
 
-                        else if (isStoppedThree && !isStoppedFour)
-                        {
-                            isStoppedThree = false;
-                            isStoppedFour = true;
-                        }
-                        else if (isStoppedFour && !isStoppedFive)
-                        {
-                            isStoppedFour = false;
-                            isStoppedFive = true;
-                        }
-                        else if (isStoppedFive && !isStoppedSix)
-                        {
-                            isStoppedFive = false;
-                            isStoppedSix = true;
-                        }
-                        else if (isStoppedSix && !isStoppedSeven)
-                        {
-                            isStoppedSix = false;
-                            isStoppedSeven = true;
+                            else if (isStoppedThree && !isStoppedFour)
+                            {
+                                isStoppedThree = false;
+                                isStoppedFour = true;
+                            }
+                            else if (isStoppedFour && !isStoppedFive)
+                            {
+                                isStoppedFour = false;
+                                isStoppedFive = true;
+                            }
+                            else if (isStoppedFive && !isStoppedSix)
+                            {
+                                isStoppedFive = false;
+                                isStoppedSix = true;
+                            }
+                            else if (isStoppedSix && !isStoppedSeven)
+                            {
+                                isStoppedSix = false;
+                                isStoppedSeven = true;
+                                //
+                                BoatOneStatics.isDriveBoatOne = false;
+                            }
+
                         }
 
                     }
 
                 }
-                
             }
         }
     }

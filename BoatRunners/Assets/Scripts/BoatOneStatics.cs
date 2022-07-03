@@ -24,4 +24,6 @@ public static class BoatOneStatics
     public static string speechText { get; set; }
     [DefaultValue(false)]
     public static bool isAtBoatOne { get; set; }
+    [DefaultValue(false)]
+    public static bool isDriveBoatOne { get; set; }
 }

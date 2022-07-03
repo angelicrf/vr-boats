@@ -5,10 +5,13 @@ using UnityEngine;
 public class DriverAnimController : MonoBehaviour
 {
     private bool isResponded = false;
+    private bool isRepeated = false;
     private bool isAudioChanged = false;
     private bool isClearAudio= false;
     private bool isAskAudio = false;
     private bool isDriveAudio = false;
+    private bool isYesToDrive;
+    private bool isLastStep = false;
     [DefaultValue(false)]
     private bool isDrStarted { get; set; }
     [DefaultValue(false)]
@@ -18,6 +21,7 @@ public class DriverAnimController : MonoBehaviour
     public AudioClip clearDialog;
     public AudioClip driveDialog;
     public GameObject thisCell;
+    public GameObject driverDr;
     void FixedUpdate() 
     {
         if (BoatOneStatics.isBoatTeleported)
@@ -29,7 +33,6 @@ public class DriverAnimController : MonoBehaviour
                 if (gameObject.GetComponent<AudioSource>().enabled && gameObject.GetComponent<Animator>().enabled)
                 {
                     gameObject.GetComponent<AudioSource>().Play();
-                    //gameObject.GetComponent<AudioSource>().volume = 1f;
                 }
             }
         }
@@ -77,11 +80,18 @@ public class DriverAnimController : MonoBehaviour
                 }
                 // more speech actions then isResponded = false
             }
-            else if (!isDrStarted)
+            else 
             {
-                StartCoroutine(RepeatSpeech2NoticeCo());
+                if (!isDrStarted)
+                {
+                    StartCoroutine(RepeatSpeech2NoticeCo());
+                }
             }
-
+            if (isDrStarted)
+            {
+                driverDr.SetActive(true);
+                gameObject.SetActive(false);
+            }
         }
     }
     private IEnumerator RepeatSpeech2Co()
@@ -90,7 +100,6 @@ public class DriverAnimController : MonoBehaviour
         {
             if (askgDialog)
             {
-                //StartCoroutine(PlayAudioClip(askgDialog));
                 if (!isAskAudio)
                 {
                     if (gameObject.GetComponent<AudioSource>().clip != askgDialog)
@@ -106,15 +115,16 @@ public class DriverAnimController : MonoBehaviour
                         isAskAudio = true;
                     }
                 }
-
                 else
                 {
                     if (gameObject.GetComponent<AudioSource>().clip == askgDialog && !gameObject.GetComponent<AudioSource>().isPlaying)
                     {
-                        yield return new WaitForSeconds(6f);
+                       yield return new WaitForSeconds(6f);
+                        isRepeated = true;
                         gameObject.GetComponent<Animator>().Play("Talking", -1, 0f);
                         gameObject.GetComponent<AudioSource>().Play();
-                        yield return null;
+
+                       yield return null;
                     }
                 }
             }
@@ -139,18 +149,27 @@ public class DriverAnimController : MonoBehaviour
             }
             else
             {
-                // run a driving animation
                 if (driveDialog)
                 {
-                    StartCoroutine(PlayAudioClip(driveDialog));
-                    if (isPlayed)
+                    if (!isYesToDrive && !isDrStarted)
                     {
-                        isDrStarted = true;
-                        isPlayed = false;
-                        yield return null;
+                        yield return new WaitForSeconds(3f);
+                       
+                        if (gameObject.GetComponent<AudioSource>().clip == driveDialog && !gameObject.GetComponent<AudioSource>().isPlaying)
+                        {
+                            gameObject.GetComponent<Animator>().Play("Talking", -1, 0f);
+                            gameObject.GetComponent<AudioSource>().Play();
+                            if (!isRepeated)
+                            {
+                                yield return new WaitForSeconds(gameObject.GetComponent<AudioSource>().clip.length);
+                            }
+                            isYesToDrive = true;
+                            isDrStarted = true;
+                            yield return null;
+                        }
                     }
-                }
-            }
+                 }
+             }
         }
     }
     private IEnumerator RepeatSpeech2NoticeCo()
@@ -176,10 +195,11 @@ public class DriverAnimController : MonoBehaviour
             {
                 if (gameObject.GetComponent<AudioSource>().clip == clearDialog && !gameObject.GetComponent<AudioSource>().isPlaying)
                 {
-                    yield return new WaitForSeconds(10f);
+                   yield return new WaitForSeconds(6f);
+                    isRepeated = true;
                     gameObject.GetComponent<Animator>().Play("Talking", -1, 0f);
                     gameObject.GetComponent<AudioSource>().Play();
-                    yield return null;
+                   yield return null;
                 }
             }
         }
@@ -195,10 +215,20 @@ public class DriverAnimController : MonoBehaviour
         {
             if (!isPlayed)
             {
+                if (isLastStep)
+                {
+                   gameObject.GetComponent<Animator>().Play("Talking", -1, 0f);
+                }
                 gameObject.GetComponent<AudioSource>().Play();
                 if (gameObject.GetComponent<AudioSource>().isPlaying)
                 {
                     yield return new WaitForSeconds(gameObject.GetComponent<AudioSource>().clip.length);
+                    if (isLastStep)
+                    {
+                        isYesToDrive = true;
+                        isDrStarted = true;
+                        isLastStep = false;
+                    }
                     isPlayed = true;
                 }
             }
