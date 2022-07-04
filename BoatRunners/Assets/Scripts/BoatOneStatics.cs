@@ -26,4 +26,6 @@ public static class BoatOneStatics
     public static bool isAtBoatOne { get; set; }
     [DefaultValue(false)]
     public static bool isDriveBoatOne { get; set; }
+    [DefaultValue(false)]
+    public static bool isBoatOneStartDrive { get; set; }
 }

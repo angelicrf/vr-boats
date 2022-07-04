@@ -11,7 +11,7 @@ public class BoatOneAnim : MonoBehaviour
     public GameObject targetObject5;
     public GameObject targetObject6;
     public GameObject targetObject7;
-    private float speed = 1.5f;
+    private float speed = 3f;
     [DefaultValue(false)]
     private bool isStoppedOne { get; set; }
 
@@ -37,6 +37,7 @@ public class BoatOneAnim : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        //Quaternion NewRotation = Quaternion.LookRotation(relativePos);
         if (!isStoppedOne)
         {
             BoatMovePath(targetObject1,  0, 1);
@@ -85,8 +86,11 @@ public class BoatOneAnim : MonoBehaviour
                         {
                             gameObject.GetComponent<Animator>().SetBool("isBtDrive", true);
                         }
+                    }else if(gameObject.GetComponent<Animator>().enabled && !gameObject.GetComponent<Animator>().GetBool("isBtDrive"))
+                    {
+                        gameObject.GetComponent<Animator>().SetBool("isBtDrive", true);
                     }
-                    else if (gameObject.GetComponent<Animator>().enabled && gameObject.GetComponent<Animator>().GetBool("isBtDrive"))
+                    if (gameObject.GetComponent<Animator>().enabled && gameObject.GetComponent<Animator>().GetBool("isBtDrive"))
                     {
                         gameObject.GetComponent<Animator>().SetFloat("VelocityX", thisX);
                         gameObject.GetComponent<Animator>().SetFloat("VelocityY", thisY);
@@ -123,7 +127,9 @@ public class BoatOneAnim : MonoBehaviour
                                 isStoppedSix = false;
                                 isStoppedSeven = true;
                                 //
+                                Debug.Log("lastStop");
                                 BoatOneStatics.isDriveBoatOne = false;
+                                BoatOneStatics.isBoatOneStartDrive = true;
                             }
 
                         }

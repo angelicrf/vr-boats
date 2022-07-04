@@ -22,6 +22,13 @@ public class DriverAnimController : MonoBehaviour
     public AudioClip driveDialog;
     public GameObject thisCell;
     public GameObject driverDr;
+    private void Start()
+    {
+        foreach (var device in Microphone.devices)
+        {
+            Debug.Log("Name: " + device);
+        }
+    }
     void FixedUpdate() 
     {
         if (BoatOneStatics.isBoatTeleported)
@@ -60,15 +67,18 @@ public class DriverAnimController : MonoBehaviour
             {
                 if (greetingDialog)
                 {
-                   StartCoroutine( PlayAudioClip(greetingDialog));
+                   StartCoroutine(PlayAudioClip(greetingDialog));
                     if (isPlayed)
                     {
                         isAudioChanged = true;
-                        isResponded = true;
                         isPlayed = false;
                     }
                 }
             }
+        }
+        if (isAudioChanged && !isResponded)
+        {
+            StartCoroutine(PlayAudioPause());
         }
         if (isResponded)
         {
@@ -159,8 +169,10 @@ public class DriverAnimController : MonoBehaviour
                         {
                             gameObject.GetComponent<Animator>().Play("Talking", -1, 0f);
                             gameObject.GetComponent<AudioSource>().Play();
+
                             if (!isRepeated)
                             {
+                                Debug.Log(gameObject.GetComponent<AudioSource>().clip.name);
                                 yield return new WaitForSeconds(gameObject.GetComponent<AudioSource>().clip.length);
                             }
                             isYesToDrive = true;
@@ -214,25 +226,20 @@ public class DriverAnimController : MonoBehaviour
         if (gameObject.GetComponent<AudioSource>().clip == thisClip && !gameObject.GetComponent<AudioSource>().isPlaying)
         {
             if (!isPlayed)
-            {
-                if (isLastStep)
-                {
-                   gameObject.GetComponent<Animator>().Play("Talking", -1, 0f);
-                }
+            { 
                 gameObject.GetComponent<AudioSource>().Play();
                 if (gameObject.GetComponent<AudioSource>().isPlaying)
                 {
                     yield return new WaitForSeconds(gameObject.GetComponent<AudioSource>().clip.length);
-                    if (isLastStep)
-                    {
-                        isYesToDrive = true;
-                        isDrStarted = true;
-                        isLastStep = false;
-                    }
                     isPlayed = true;
                 }
             }
         }
         yield return null;
+    }
+    private IEnumerator PlayAudioPause()
+    {
+        yield return new WaitForSeconds(5f);
+        isResponded = true;
     }
 }

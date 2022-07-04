@@ -3,16 +3,31 @@ using UnityEngine;
 
 public class DriverDriveAnim : MonoBehaviour
 {
-    private bool isStartDrive = false;
+    public GameObject walkAnim;
     private void FixedUpdate()
     {
-        if (!isStartDrive)
+        if (!BoatOneStatics.isBoatOneStartDrive)
         {
             StartCoroutine(MoveToDriveAnimCo());
-            isStartDrive = true;
+        }
+        if (BoatOneStatics.isBoatOneStartDrive && !BoatOneStatics.isDriveBoatOne)
+        {
+            StartCoroutine(MoveToWalkAnimCo());
         }
     }
-    private IEnumerator MoveToDriveAnimCo()
+    private IEnumerator MoveToWalkAnimCo()
+    {
+        if (walkAnim)
+        {
+            gameObject.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].wrapMode = WrapMode.Once;
+            yield return new WaitForSeconds(5f);
+            gameObject.GetComponent<Animator>().enabled = false;
+            yield return new WaitForSeconds(2f);
+            gameObject.SetActive(false);
+            walkAnim.SetActive(true);
+        }
+    }
+        private IEnumerator MoveToDriveAnimCo()
     {
         gameObject.GetComponent<Animator>().SetBool("isDriving", true);
         yield return new WaitForSeconds(12f);
