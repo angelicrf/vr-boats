@@ -24364,6 +24364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b2c2c7cf27b747499234b4b47c998b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lightSystem: {fileID: 8300000, guid: 909af1d5befa09b4aa1b6891efea40c3, type: 3}
 --- !u!82 &540054492
 AudioSource:
   m_ObjectHideFlags: 0
@@ -24374,7 +24375,7 @@ AudioSource:
   m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 931c126f91b4b4645b3da1afb69db8d8, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -50269,7 +50270,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 47873f1f9aa9405478436d96c450b114, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1320764503449572466, guid: 47873f1f9aa9405478436d96c450b114, type: 3}
       propertyPath: m_LocalPosition.x
@@ -60316,7 +60317,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b70f321f22f50a24a8b1d49e7803116f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1630794972795428178, guid: b70f321f22f50a24a8b1d49e7803116f, type: 3}
       propertyPath: m_Materials.Array.data[0]
