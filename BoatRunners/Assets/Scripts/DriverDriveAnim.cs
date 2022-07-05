@@ -29,8 +29,16 @@ public class DriverDriveAnim : MonoBehaviour
     }
         private IEnumerator MoveToDriveAnimCo()
     {
-        gameObject.GetComponent<Animator>().SetBool("isDriving", true);
-        yield return new WaitForSeconds(12f);
-        BoatOneStatics.isDriveBoatOne = true;
+        if (!gameObject.GetComponent<Animator>().enabled)
+        {
+            gameObject.GetComponent<Animator>().enabled = true;
+            yield return new WaitForSeconds(2f);
+            if (gameObject.GetComponent<Animator>().enabled)
+            {
+                gameObject.GetComponent<Animator>().SetBool("isDriving", true);
+                yield return new WaitForSeconds(12f);
+                BoatOneStatics.isDriveBoatOne = true;
+            }
+        }
     }
 }

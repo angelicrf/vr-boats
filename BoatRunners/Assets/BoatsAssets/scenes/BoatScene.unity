@@ -34052,9 +34052,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 68e7c1e2c227b364eac1c2649e0599d5, type: 2}
     - target: {fileID: 5866666021909216657, guid: b8ce2dd28621a984193c60572c6d2986, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: b8ce2dd28621a984193c60572c6d2986, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 9fa9bfd075e5e8e4ab27a650caca1960, type: 2}
+    - target: {fileID: 5866666021909216657, guid: b8ce2dd28621a984193c60572c6d2986, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8ce2dd28621a984193c60572c6d2986, type: 3}
 --- !u!4 &809654104 stripped
@@ -34079,6 +34087,103 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f82fa4732eae554d8b839e0c0edc8e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  driverStartInfo: {fileID: 8300000, guid: a5eb81fa4d36f234990f0c8d86bdc5db, type: 3}
+--- !u!82 &809654108
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809654105}
+  m_Enabled: 0
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: caedaceb9dbaaa746a2bbed30ea0c8ba, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &810228614
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50078,7 +50183,7 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 9fa9bfd075e5e8e4ab27a650caca1960, type: 2}
     - target: {fileID: 5866666021909216657, guid: 47873f1f9aa9405478436d96c450b114, type: 3}
       propertyPath: m_ApplyRootMotion
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47873f1f9aa9405478436d96c450b114, type: 3}
@@ -58663,7 +58768,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1427220973}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: 0e7f6d7e6009fba4c877dbf1cc6d3cdc, type: 3}
   m_Controller: {fileID: 9100000, guid: 9fa9bfd075e5e8e4ab27a650caca1960, type: 2}
   m_CullingMode: 0

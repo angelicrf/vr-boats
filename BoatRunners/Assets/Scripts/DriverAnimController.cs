@@ -11,6 +11,7 @@ public class DriverAnimController : MonoBehaviour
     private bool isAskAudio = false;
     private bool isDriveAudio = false;
     private bool isYesToDrive;
+    private bool isTest = false;
     private bool isLastStep = false;
     [DefaultValue(false)]
     private bool isDrStarted { get; set; }
@@ -39,7 +40,11 @@ public class DriverAnimController : MonoBehaviour
                 gameObject.GetComponent<AudioSource>().enabled = true;
                 if (gameObject.GetComponent<AudioSource>().enabled && gameObject.GetComponent<Animator>().enabled)
                 {
-                    gameObject.GetComponent<AudioSource>().Play();
+                    gameObject.GetComponent<Animator>().SetBool("isStandOnCell", true);
+                    if (gameObject.GetComponent<Animator>().GetBool("isStandOnCell"))
+                    {
+                        gameObject.GetComponent<AudioSource>().Play();
+                    }
                 }
             }
         }
@@ -57,13 +62,14 @@ public class DriverAnimController : MonoBehaviour
                 if (thisCell)
                 {
                     thisCell.SetActive(false);
+                    gameObject.GetComponent<Animator>().SetBool("isStandOnCell", false);
                     gameObject.GetComponent<Animator>().SetBool("isTalking", true);
                 }
             }
         }
         if (!isAudioChanged)
         {
-            if (gameObject.GetComponent<Animator>().GetBool("isTalking"))
+            if (gameObject.GetComponent<Animator>().GetBool("isTalking") && !gameObject.GetComponent<Animator>().GetBool("isStandOnCell"))
             {
                 if (greetingDialog)
                 {
@@ -90,7 +96,7 @@ public class DriverAnimController : MonoBehaviour
                 }
                 // more speech actions then isResponded = false
             }
-            else 
+            else
             {
                 if (!isDrStarted)
                 {
@@ -129,7 +135,7 @@ public class DriverAnimController : MonoBehaviour
                 {
                     if (gameObject.GetComponent<AudioSource>().clip == askgDialog && !gameObject.GetComponent<AudioSource>().isPlaying)
                     {
-                       yield return new WaitForSeconds(6f);
+                        yield return new WaitForSeconds(6f);
                         isRepeated = true;
                         gameObject.GetComponent<Animator>().Play("Talking", -1, 0f);
                         gameObject.GetComponent<AudioSource>().Play();
@@ -164,17 +170,14 @@ public class DriverAnimController : MonoBehaviour
                     if (!isYesToDrive && !isDrStarted)
                     {
                         yield return new WaitForSeconds(3f);
-                       
-                        if (gameObject.GetComponent<AudioSource>().clip == driveDialog && !gameObject.GetComponent<AudioSource>().isPlaying)
+
+                        if (gameObject.GetComponent<AudioSource>().clip == driveDialog && !gameObject.GetComponent<AudioSource>().isPlaying && !isTest)
                         {
                             gameObject.GetComponent<Animator>().Play("Talking", -1, 0f);
                             gameObject.GetComponent<AudioSource>().Play();
-
-                            if (!isRepeated)
-                            {
-                                Debug.Log(gameObject.GetComponent<AudioSource>().clip.name);
-                                yield return new WaitForSeconds(gameObject.GetComponent<AudioSource>().clip.length);
-                            }
+                            isTest = true;
+                        }
+                        if (!gameObject.GetComponent<AudioSource>().isPlaying && isTest) {
                             isYesToDrive = true;
                             isDrStarted = true;
                             yield return null;
@@ -207,7 +210,7 @@ public class DriverAnimController : MonoBehaviour
             {
                 if (gameObject.GetComponent<AudioSource>().clip == clearDialog && !gameObject.GetComponent<AudioSource>().isPlaying)
                 {
-                   yield return new WaitForSeconds(6f);
+                    yield return new WaitForSeconds(6f);
                     isRepeated = true;
                     gameObject.GetComponent<Animator>().Play("Talking", -1, 0f);
                     gameObject.GetComponent<AudioSource>().Play();
@@ -228,10 +231,16 @@ public class DriverAnimController : MonoBehaviour
             if (!isPlayed)
             { 
                 gameObject.GetComponent<AudioSource>().Play();
-                if (gameObject.GetComponent<AudioSource>().isPlaying)
+                
+                //if (gameObject.GetComponent<AudioSource>().isPlaying)
+                //{
+                //    yield return new WaitForSeconds(gameObject.GetComponent<AudioSource>().clip.length);
+                //    isPlayed = true;
+                //}
+                if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !gameObject.GetComponent<Animator>().IsInTransition(0))
                 {
-                    yield return new WaitForSeconds(gameObject.GetComponent<AudioSource>().clip.length);
-                    isPlayed = true;
+                   yield return new WaitForSeconds(3.577f);
+                   isPlayed = true;
                 }
             }
         }
