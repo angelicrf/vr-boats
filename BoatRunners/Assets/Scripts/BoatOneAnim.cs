@@ -29,11 +29,10 @@ public class BoatOneAnim : MonoBehaviour
     private bool isStoppedSix { get; set; }
     [DefaultValue(false)]
     private bool isStoppedSeven { get; set; }
-    private bool isFirstTime = false;
+    private bool isLastStep = false;
     public void ReduceAnimSpeed()
     {
-        gameObject.GetComponent<Animator>().playbackTime = 0.2f;
-            //speed = 0.35f;
+        gameObject.GetComponent<Animator>().speed = 0.35f;
     }
     private void FixedUpdate()
     {
@@ -65,8 +64,19 @@ public class BoatOneAnim : MonoBehaviour
         else if (isStoppedSeven)
         {
           BoatMovePath(targetObject7, -1, 0);
+          if (!isLastStep)
+          {
+            StartCoroutine(LastMoveCo());
+          }
         }
 
+    }
+    private IEnumerator LastMoveCo()
+    {
+        yield return new WaitForSeconds(gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+        BoatOneStatics.isDriveBoatOne = false;
+        BoatOneStatics.isBoatOneStartDrive = true;
+        isLastStep = true;
     }
     private void BoatMovePath(GameObject thisobj, float thisX, float thisY)
     {
@@ -126,16 +136,9 @@ public class BoatOneAnim : MonoBehaviour
                             {
                                 isStoppedSix = false;
                                 isStoppedSeven = true;
-                                //
-                                Debug.Log("lastStop");
-                                BoatOneStatics.isDriveBoatOne = false;
-                                BoatOneStatics.isBoatOneStartDrive = true;
                             }
-
                         }
-
                     }
-
                 }
             }
         }

@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class DriverDriveAnim : MonoBehaviour
@@ -6,38 +5,15 @@ public class DriverDriveAnim : MonoBehaviour
     public GameObject walkAnim;
     private void FixedUpdate()
     {
-        if (!BoatOneStatics.isBoatOneStartDrive)
+        if (BoatOneStatics.isBoatTeleported)
         {
-            StartCoroutine(MoveToDriveAnimCo());
-        }
-        if (BoatOneStatics.isBoatOneStartDrive && !BoatOneStatics.isDriveBoatOne)
-        {
-            StartCoroutine(MoveToWalkAnimCo());
-        }
-    }
-    private IEnumerator MoveToWalkAnimCo()
-    {
-        if (walkAnim)
-        {
-            gameObject.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].wrapMode = WrapMode.Once;
-            yield return new WaitForSeconds(5f);
-            gameObject.GetComponent<Animator>().enabled = false;
-            yield return new WaitForSeconds(2f);
-            gameObject.SetActive(false);
-            walkAnim.SetActive(true);
-        }
-    }
-        private IEnumerator MoveToDriveAnimCo()
-    {
-        if (!gameObject.GetComponent<Animator>().enabled)
-        {
-            gameObject.GetComponent<Animator>().enabled = true;
-            yield return new WaitForSeconds(2f);
-            if (gameObject.GetComponent<Animator>().enabled)
+            if (!BoatOneStatics.isBoatOneStartDrive)
             {
-                gameObject.GetComponent<Animator>().SetBool("isDriving", true);
-                yield return new WaitForSeconds(12f);
-                BoatOneStatics.isDriveBoatOne = true;
+                StartCoroutine(DriverStatics.MoveToDriveAnimCo(gameObject, "isDriving", res => BoatOneStatics.isDriveBoatOne = res));
+            }
+            if (BoatOneStatics.isBoatOneStartDrive && !BoatOneStatics.isDriveBoatOne)
+            {
+                StartCoroutine(DriverStatics.MoveDriveToWalkAnimCo(gameObject, walkAnim));
             }
         }
     }

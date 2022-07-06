@@ -37,11 +37,7 @@ public class DriverBtnPushAnim : MonoBehaviour
     }
     private IEnumerator DriverBTNCo()
     {
-        if (!gameObject.GetComponent<AudioSource>().enabled || !gameObject.GetComponent<Animator>().enabled)
-        {
-            gameObject.GetComponent<AudioSource>().enabled = true;
-            gameObject.GetComponent<Animator>().enabled = true;
-        }
+        DriverStatics.EnableAnimatorAudio(gameObject);
         if (!isStartedBtn)
         {
             if (gameObject.GetComponent<AudioSource>().enabled && gameObject.GetComponent<Animator>().enabled)
