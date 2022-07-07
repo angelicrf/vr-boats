@@ -11,6 +11,7 @@ public class DriverAnimController : MonoBehaviour
     private bool isDriveAudio = false;
     private bool isYesToDrive;
     private bool isTest = false;
+    private bool isSetUp = false;
     [DefaultValue(false)]
     private bool isDrStarted { get; set; }
     [DefaultValue(false)]
@@ -27,85 +28,71 @@ public class DriverAnimController : MonoBehaviour
         {
             Debug.Log("Name: " + device);
         }
-        driverDr.transform.position = new Vector3(driverDr.transform.position.x,1.43f, driverDr.transform.position.z);
+        driverDr.transform.position = new Vector3(driverDr.transform.position.x,1f, driverDr.transform.position.z);
     }
     void FixedUpdate() 
     {
         if (BoatOneStatics.isBoatTeleported)
         {
-            if (!gameObject.GetComponent<AudioSource>().enabled && !gameObject.GetComponent<Animator>().enabled)
+
+            if (!isSetUp)
             {
-                gameObject.GetComponent<Animator>().enabled = true;
-                gameObject.GetComponent<AudioSource>().enabled = true;
-                if (gameObject.GetComponent<AudioSource>().enabled && gameObject.GetComponent<Animator>().enabled)
+                StartCoroutine(DriverStatics.RunAnimCo(gameObject, "isStandOnCell", res => isSetUp = res));
+            }
+
+            if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Stand-TalkingCell"))
+            {
+                if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !gameObject.GetComponent<Animator>().IsInTransition(0))
                 {
-                    gameObject.GetComponent<Animator>().SetBool("isStandOnCell", true);
-                    if (gameObject.GetComponent<Animator>().GetBool("isStandOnCell"))
+                    if (thisCell)
                     {
-                        gameObject.GetComponent<AudioSource>().Play();
+                        thisCell.SetActive(false);
+                        gameObject.GetComponent<Animator>().SetBool("isStandOnCell", false);
+                        gameObject.GetComponent<Animator>().SetBool("isTalking", true);
                     }
                 }
             }
-        }
-        //else
-        //{
-        //    if (gameObject.GetComponent<AudioSource>().enabled)
-        //    {
-        //        gameObject.GetComponent<AudioSource>().enabled = false;
-        //    }
-        //}
-        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Stand-TalkingCell"))
-        {
-            if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !gameObject.GetComponent<Animator>().IsInTransition(0))
+            if (!isAudioChanged)
             {
-                if (thisCell)
+                if (gameObject.GetComponent<Animator>().GetBool("isTalking") && !gameObject.GetComponent<Animator>().GetBool("isStandOnCell"))
                 {
-                    thisCell.SetActive(false);
-                    gameObject.GetComponent<Animator>().SetBool("isStandOnCell", false);
-                    gameObject.GetComponent<Animator>().SetBool("isTalking", true);
-                }
-            }
-        }
-        if (!isAudioChanged)
-        {
-            if (gameObject.GetComponent<Animator>().GetBool("isTalking") && !gameObject.GetComponent<Animator>().GetBool("isStandOnCell"))
-            {
-                if (greetingDialog)
-                {
-                   StartCoroutine(PlayAudioClip(greetingDialog));
-                    if (isPlayed)
+                    if (greetingDialog)
                     {
-                        isAudioChanged = true;
-                        isPlayed = false;
+                        StartCoroutine(PlayAudioClip(greetingDialog));
+                        if (isPlayed)
+                        {
+                            isAudioChanged = true;
+                            isPlayed = false;
+                        }
                     }
                 }
             }
-        }
-        if (isAudioChanged && !isResponded)
-        {
-            StartCoroutine(PlayAudioPause());
-        }
-        if (isResponded)
-        {
-            if (BoatOneStatics.isSpeechDone)
+            if (isAudioChanged && !isResponded)
             {
-                if (!isDrStarted)
-                {
-                    StartCoroutine(RepeatSpeech2Co());
-                }
-                // more speech actions then isResponded = false
+                StartCoroutine(PlayAudioPause());
             }
-            else
+            if (isResponded)
             {
-                if (!isDrStarted)
+                if (BoatOneStatics.isSpeechDone)
                 {
-                    StartCoroutine(RepeatSpeech2NoticeCo());
+                    if (!isDrStarted)
+                    {
+                        StartCoroutine(RepeatSpeech2Co());
+                    }
+                    // more speech actions then isResponded = false
                 }
-            }
-            if (isDrStarted)
-            {
-                driverDr.SetActive(true);
-                gameObject.SetActive(false);
+                else
+                {
+                    if (!isDrStarted)
+                    {
+                        DriverStatics.RepeatSpeechNoticeCo(gameObject, clearDialog, res => isClearAudio = res);
+                    }
+                }
+                if (isDrStarted)
+                {
+                    driverDr.SetActive(true);
+                    gameObject.SetActive(false);
+                }
             }
         }
     }
@@ -113,34 +100,7 @@ public class DriverAnimController : MonoBehaviour
     {
         if (BoatOneStatics.speechText.Split(' ')[0].ToString() != "yes")
         {
-            if (askgDialog)
-            {
-                if (!isAskAudio)
-                {
-                    if (gameObject.GetComponent<AudioSource>().clip != askgDialog)
-                    {
-                        gameObject.GetComponent<AudioSource>().clip = askgDialog;
-                    }
-                    if (isPlayed)
-                    {
-                        isPlayed = false;
-                    }
-                    if (!isPlayed && gameObject.GetComponent<AudioSource>().clip == askgDialog)
-                    {
-                        isAskAudio = true;
-                    }
-                }
-                else
-                {
-                    if (gameObject.GetComponent<AudioSource>().clip == askgDialog && !gameObject.GetComponent<AudioSource>().isPlaying)
-                    {
-                        yield return new WaitForSeconds(6f);
-                        gameObject.GetComponent<Animator>().Play("Talking", -1, 0f);
-                        gameObject.GetComponent<AudioSource>().Play();
-                        yield return null;
-                    }
-                }
-            }
+            DriverStatics.RepeatSpeechNoticeCo(gameObject,askgDialog,res => isAskAudio = res);
         }
         else 
         if (BoatOneStatics.speechText.Split(' ')[0].ToString() == "yes")
@@ -181,37 +141,6 @@ public class DriverAnimController : MonoBehaviour
                     }
                  }
              }
-        }
-    }
-    private IEnumerator RepeatSpeech2NoticeCo()
-    {
-        if (clearDialog)
-        {
-            if (!isClearAudio)
-            {
-                if (gameObject.GetComponent<AudioSource>().clip != clearDialog)
-                {
-                    gameObject.GetComponent<AudioSource>().clip = clearDialog;
-                }
-                if (isPlayed)
-                {
-                    isPlayed = false;
-                }
-                if (!isPlayed && gameObject.GetComponent<AudioSource>().clip == clearDialog)
-                {
-                    isClearAudio = true;
-                }
-            }
-            else
-            {
-                if (gameObject.GetComponent<AudioSource>().clip == clearDialog && !gameObject.GetComponent<AudioSource>().isPlaying)
-                {
-                    yield return new WaitForSeconds(6f);
-                    gameObject.GetComponent<Animator>().Play("Talking", -1, 0f);
-                    gameObject.GetComponent<AudioSource>().Play();
-                    yield return null;
-                }
-            }
         }
     }
     private IEnumerator PlayAudioClip(AudioClip thisClip)

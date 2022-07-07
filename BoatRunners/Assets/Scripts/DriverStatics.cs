@@ -42,25 +42,24 @@ public static class DriverStatics {
     private static bool ReturnFirstValue = false;
     private static bool ReturnSecondValue = false;
     private static bool isEnabed = false;
-    public static IEnumerator RunAnimCo(GameObject thisObj,Action<bool> isNowPlaying,string setBool, string clipName, Action<bool> isNext)
+    private static bool isRun = false;
+  
+    public static IEnumerator RunAnimCo(GameObject thisObj,string setBool, Action<bool> isNext, AudioClip thisClip = null, string clipName = null)
     {
-    
-        if (thisObj.GetComponent<AudioSource>().enabled && thisObj.GetComponent<Animator>().enabled && !ReturnValue)
+        if (!isRun)
         {
-            thisObj.GetComponent<Animator>().SetBool(setBool, true);
-            isNowPlaying = flag => ReturnValue = flag;
-            isNowPlaying(false);
-           if (thisObj.GetComponent<AudioSource>().clip.name == clipName && !thisObj.GetComponent<AudioSource>().isPlaying)
+            EnableAnimatorAudio(thisObj);
+            if (thisObj.GetComponent<AudioSource>().enabled && thisObj.GetComponent<Animator>().enabled && !ReturnValue)
             {
-                thisObj.GetComponent<AudioSource>().Play();
-                isNowPlaying(true);
+                thisObj.GetComponent<Animator>().SetBool(setBool, true);
+                SetAudio(thisObj, thisClip, ref isRun);
             }
         }
-        if (ReturnValue)
+        if (isRun)
         {
             yield return new WaitForSeconds(thisObj.GetComponent<AudioSource>().clip.length);
-            ReturnValue = false;
             isNext(true);
+            isRun = false;
             yield return null;
         }
     }
@@ -95,6 +94,30 @@ public static class DriverStatics {
         {
             nextBool(true);
             ResetValues();
+            yield return null;
+        }
+    }
+    public static void RepeatSpeechNoticeCo(GameObject thisObj, AudioClip thisClip, Action<bool> isNextStep)
+    {
+        if (thisClip)
+        {
+            if (!isRun)
+            {
+                SetAudio(thisObj, thisClip, ref isRun);
+            }
+            else
+            {
+                RepeatAnim(thisObj,thisClip,"Talking");
+            }
+        }
+    }
+    private static IEnumerator RepeatAnim(GameObject thisObj, AudioClip thisClip, string animState)
+    {
+        if (thisObj.GetComponent<AudioSource>().clip == thisClip && !thisObj.GetComponent<AudioSource>().isPlaying)
+        {
+            yield return new WaitForSeconds(6f);
+            thisObj.GetComponent<Animator>().Play(animState, -1, 0f);
+            thisObj.GetComponent<AudioSource>().Play();
             yield return null;
         }
     }

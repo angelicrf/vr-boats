@@ -11,9 +11,9 @@ public class DriverStandAnim : MonoBehaviour
     public GameObject driverBtn;
     private void FixedUpdate()
     {
-       
-        //if (BoatOneStatics.isBoatTeleported)
-       // {
+
+        if (BoatOneStatics.isBoatTeleported)
+        {
             if (!isDrStanding)
             {
                StartCoroutine(DriverStatics.MoveToWalkTalkAnimCo(gameObject, result => isDrStanding = result,"isStanding"));
@@ -32,6 +32,6 @@ public class DriverStandAnim : MonoBehaviour
                 gameObject.SetActive(false);
                 driverBtn.SetActive(true);
             }
-        //}
+        }
     }
 }
