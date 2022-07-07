@@ -198,7 +198,6 @@ public class BoatMenu : MonoBehaviour
     private bool isTmpIcon = false;
     private bool isTempCity = false;
     private bool isFrgAnimDone = false;
-    private bool isDrLightSysOn = false;
     private ColorBlock textColorOne;
     private ColorBlock textColorTwo;
     //
@@ -220,7 +219,11 @@ public class BoatMenu : MonoBehaviour
         {
             SpotLightSystem();
         }
-        
+        if (BoatOneStatics.isDriverAsked && BoatOneStatics.isDrLightsOn)
+        {
+            SpotLightSystemOn();
+        }
+
         timeMenu.GetComponent<Text>().text = DateTime.Now.ToString("HH:mm");
         temprMenu.GetComponent<Text>().text = string.Format("{0}\u00B0F", BoatOneStatics.tempMax) + " in " + BoatOneStatics.city;
         textColorOne = cameraOne.GetComponent<Button>().colors;

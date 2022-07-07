@@ -8,6 +8,7 @@ public class DriverBtnPushAnim : MonoBehaviour
     private bool isActivatedBtn = false;
     private bool isPlaying = false;
     private bool isLightsOn = false;
+    private bool isLightsTurnOn = false;
     private bool isNextStep = false;
     private bool isFirstStep = false;
     private bool isAnimOnce = false;
@@ -15,29 +16,30 @@ public class DriverBtnPushAnim : MonoBehaviour
     public AudioClip lightSystem;
     void FixedUpdate()
     {
-       // if (BoatOneStatics.isBoatTeleported)
-       // {
+       if (BoatOneStatics.isBoatTeleported)
+       {
             if (!isStartedBtn)
             {
                 StartCoroutine(DriverBTNCo());
             }
-            if (isActivatedBtn && !isLightsOn)
+            else if (isActivatedBtn && !isLightsOn)
             {
                 StartCoroutine(DriverActivateDisplayCo());
             }
-        //if (isLightsOn)
-        //{
-        //    StartCoroutine(DriverLightsCo());
-        //}
-        //if (isNextStep)
-        //{
-        //    Debug.Log("lastTry...");
-        //}
-        if (isStartedBtn || isLightsOn)
-        {
-            DefineBoatState(DriverStatics.boatNames);
-        }
-        // }
+            else if (isLightsOn && !isLightsTurnOn)
+            {
+                StartCoroutine(DriverLightOnDisplayCo());
+            }
+            if (isLightsTurnOn)
+            {
+                isAnimOnce = false;
+            }
+
+            if (isStartedBtn || isLightsOn || isLightsTurnOn)
+            {
+                DefineBoatState(DriverStatics.boatNames);
+            }
+         }
     }
     private void DefineBoatState(DriverStatics.allBoats op)
     { 
@@ -52,6 +54,10 @@ public class DriverBtnPushAnim : MonoBehaviour
                     {
                         BoatOneStatics.isSystemLightsOn = true;
                     }
+                    if (isLightsOn && isActivatedBtn && isLightsTurnOn)
+                    {
+                        BoatOneStatics.isDrLightsOn = true;
+                    }
                     if (isActivatedBtn && !isLightsOn)
                     {
                         BoatOneStatics.isMenuActivated = true;
@@ -59,21 +65,21 @@ public class DriverBtnPushAnim : MonoBehaviour
                    break;
 
                 case DriverStatics.allBoats.boatTwo:
-                if (isLightsOn)
-                {
-                    Debug.Log("in Boat two");
-                    //BoatTwoStatics.isSystemLightsOn = true;
-                }
-                else
-                {
-                    Debug.Log("in Boat two");
-                    //BoatTwoStatics.isSystemLightsOff= false;
-                }
-                if (isActivatedBtn)
-                {
-                    Debug.Log("in Boat two");
-                    // boatTwoStatic
-                }
+                    if (isLightsOn)
+                    {
+                        Debug.Log("in Boat two");
+                        //BoatTwoStatics.isSystemLightsOn = true;
+                    }
+                    else
+                    {
+                        Debug.Log("in Boat two");
+                        //BoatTwoStatics.isSystemLightsOff= false;
+                    }
+                    if (isActivatedBtn)
+                    {
+                        Debug.Log("in Boat two");
+                        // boatTwoStatic
+                    }
                 break;
 
                default:
@@ -141,24 +147,23 @@ public class DriverBtnPushAnim : MonoBehaviour
         if (isAnimOnce && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !gameObject.GetComponent<Animator>().IsInTransition(0) && !isLightsOn)
         {
             yield return new WaitForSeconds(3f);
+            isAnimOnce = false;
             isLightsOn = true;
             yield return null;
         }
     }
-    //private IEnumerator DriverLightsCo()
-    //{
-    //    if (!isPlaying2)
-    //    {
-    //        yield return new WaitForSeconds(2f);
-    //        gameObject.GetComponent<Animator>().Play("BtnPushing", -1, 0f);
-    //        gameObject.GetComponent<AudioSource>().clip = lightSystem;
-    //        gameObject.GetComponent<AudioSource>().Play();
-    //        isPlaying2 = true;
-    //    }
-    //    if (isPlaying2)
-    //    {
-    //        yield return new WaitForSeconds(gameObject.GetComponent<AudioSource>().clip.length);
-    //        isNextStep = true;
-    //    }
-    //}
+    private IEnumerator DriverLightOnDisplayCo()
+    {
+        if (!isAnimOnce && !isLightsTurnOn)
+         {
+            gameObject.GetComponent<Animator>().Play("BtnPushing", -1, 0f);
+            isAnimOnce = true;
+         }
+        
+        if (isAnimOnce && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !gameObject.GetComponent<Animator>().IsInTransition(0))
+        {
+            isLightsTurnOn = true;
+            yield return null;
+        }
+    }
 }
