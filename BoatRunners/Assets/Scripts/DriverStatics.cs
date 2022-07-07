@@ -4,6 +4,15 @@ using UnityEngine;
 
 public static class DriverStatics {
 
+    private static bool ReturnValue = false;
+    private static bool ReturnFirstValue = false;
+    private static bool ReturnSecondValue = false;
+    private static bool isEnabed = false;
+    private static bool isRun = false;
+    public static bool isThisBoat = false;
+    public static allBoats boatNames;
+    public enum allBoats { boatOne, boatTwo};
+
     public static void EnableAnimatorAudio(GameObject thisObj)
     {
         if (!thisObj.GetComponent<AudioSource>().enabled || !thisObj.GetComponent<Animator>().enabled)
@@ -38,12 +47,6 @@ public static class DriverStatics {
             otherObj.SetActive(true);
         }
     }
-    private static bool ReturnValue = false;
-    private static bool ReturnFirstValue = false;
-    private static bool ReturnSecondValue = false;
-    private static bool isEnabed = false;
-    private static bool isRun = false;
-  
     public static IEnumerator RunAnimCo(GameObject thisObj,string setBool, Action<bool> isNext, AudioClip thisClip = null, string clipName = null)
     {
         if (!isRun)

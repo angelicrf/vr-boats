@@ -198,6 +198,7 @@ public class BoatMenu : MonoBehaviour
     private bool isTmpIcon = false;
     private bool isTempCity = false;
     private bool isFrgAnimDone = false;
+    private bool isDrLightSysOn = false;
     private ColorBlock textColorOne;
     private ColorBlock textColorTwo;
     //
@@ -205,6 +206,21 @@ public class BoatMenu : MonoBehaviour
     public Animator frAnim;
     private void FixedUpdate()
     {
+        if(gameObject.name == "Boat_1")
+        {
+            DriverStatics.boatNames = DriverStatics.allBoats.boatOne;
+        }
+    
+        if (BoatOneStatics.isDriverAsked && BoatOneStatics.isMenuActivated)
+        {
+            StartBoatSystem();
+        }
+
+        if (BoatOneStatics.isDriverAsked && BoatOneStatics.isSystemLightsOn)
+        {
+            SpotLightSystem();
+        }
+        
         timeMenu.GetComponent<Text>().text = DateTime.Now.ToString("HH:mm");
         temprMenu.GetComponent<Text>().text = string.Format("{0}\u00B0F", BoatOneStatics.tempMax) + " in " + BoatOneStatics.city;
         textColorOne = cameraOne.GetComponent<Button>().colors;
@@ -703,7 +719,7 @@ public class BoatMenu : MonoBehaviour
     //
     public void StartBoatSystem()
     {
-        mainMenu.SetActive( false );
+        mainMenu.SetActive(false);
         timeMenu.SetActive(false);
         temprMenu.SetActive(false);
         fuelMenu.SetActive(false);
@@ -712,7 +728,12 @@ public class BoatMenu : MonoBehaviour
         timeImg.SetActive(false);
         temprImg.SetActive(false);
         userInput.SetActive(false);
-        displayMenu.SetActive( true );
+        displayMenu.SetActive(true);
+        if(BoatOneStatics.isDriverAsked && BoatOneStatics.isMenuActivated)
+        {
+            BoatOneStatics.isMenuActivated = false;
+            BoatOneStatics.isDriverAsked = false;
+        }
     }
     public void StartAlarmSystem()
     {
@@ -745,6 +766,11 @@ public class BoatMenu : MonoBehaviour
     {
         displayMenu.SetActive(false);
         spotLight.SetActive(true);
+        if (BoatOneStatics.isDriverAsked && BoatOneStatics.isMenuActivated)
+        {
+            BoatOneStatics.isSystemLightsOn = false;
+            BoatOneStatics.isDriverAsked = false;
+        }
     }
     public void RadarSystem()
     {

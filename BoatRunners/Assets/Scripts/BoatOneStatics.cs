@@ -28,4 +28,12 @@ public static class BoatOneStatics
     public static bool isDriveBoatOne { get; set; }
     [DefaultValue(false)]
     public static bool isBoatOneStartDrive { get; set; }
+    [DefaultValue(false)]
+    public static bool isSystemLightsOn { get; set; }
+    [DefaultValue(false)]
+    public static bool isSystemLightsOff { get; set; }
+    [DefaultValue(false)]
+    public static bool isMenuActivated { get; set; }
+    [DefaultValue(false)]
+    public static bool isDriverAsked { get; set; }
 }
