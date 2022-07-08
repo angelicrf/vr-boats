@@ -22,17 +22,10 @@ public class DriverAnimController : MonoBehaviour
     public AudioClip driveDialog;
     public GameObject thisCell;
     public GameObject driverDr;
-    private void Start()
-    {
-        foreach (var device in Microphone.devices)
-        {
-            Debug.Log("Name: " + device);
-        }
-        driverDr.transform.position = new Vector3(driverDr.transform.position.x,1f, driverDr.transform.position.z);
-    }
+ 
     void FixedUpdate() 
     {
-        if (BoatOneStatics.isBoatTeleported)
+        if (BoatOneStatics.isTeleportCompleted)
         {
 
             if (!isSetUp)

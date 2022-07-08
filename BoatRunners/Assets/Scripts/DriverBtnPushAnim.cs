@@ -16,7 +16,7 @@ public class DriverBtnPushAnim : MonoBehaviour
     public AudioClip lightSystem;
     void FixedUpdate()
     {
-       if (BoatOneStatics.isBoatTeleported)
+       if (BoatOneStatics.isTeleportCompleted)
        {
             if (!isStartedBtn)
             {

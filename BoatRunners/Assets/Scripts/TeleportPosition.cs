@@ -14,7 +14,7 @@ public class TeleportPosition : MonoBehaviour
             BoatOneStatics.isInBoatOne = false;
             BoatOneStatics.isSat = false;
             thisPlayer.transform.parent = null; 
-            StartCoroutine( ChangeTelPosCo() );           
+            StartCoroutine( ChangeTelPosCo() );  
         }
         else if (BoatOneStatics.isBoatTeleported && !isTeleported)
         {
@@ -67,6 +67,21 @@ public class TeleportPosition : MonoBehaviour
         if (thisPlayer)
         {
           BoatOneStatics.isBoatTeleported = false;
+        }
+    }
+    public void PlayerTeleportComplete()
+    {
+        if (thisPlayer)
+        {
+            BoatOneStatics.isTeleportCompleted = true;
+            //make it to false while it teleport to outside of the boat
+        }
+    }
+    public void PlayerTeleportLandComplete()
+    {
+        if (thisPlayer)
+        {
+            BoatOneStatics.isTeleportCompleted = false;
         }
     }
 

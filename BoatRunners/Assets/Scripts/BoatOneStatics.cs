@@ -10,6 +10,8 @@ public static class BoatOneStatics
     [DefaultValue( false )]
     public static bool isBoatTeleported { get; set; }
     [DefaultValue(false)]
+    public static bool isTeleportCompleted { get; set; }
+    [DefaultValue(false)]
     public static bool isInBoatOne { get; set; }
     public static string city { get; set; }
     public static string dateW { get; set; }

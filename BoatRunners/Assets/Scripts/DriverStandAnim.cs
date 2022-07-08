@@ -12,7 +12,7 @@ public class DriverStandAnim : MonoBehaviour
     private void FixedUpdate()
     {
 
-        if (BoatOneStatics.isBoatTeleported)
+        if (BoatOneStatics.isTeleportCompleted)
         {
             if (!isDrStanding)
             {
