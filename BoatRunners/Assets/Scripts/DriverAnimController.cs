@@ -1,6 +1,8 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class DriverAnimController : MonoBehaviour
 {
@@ -12,22 +14,24 @@ public class DriverAnimController : MonoBehaviour
     private bool isYesToDrive;
     private bool isTest = false;
     private bool isSetUp = false;
+ 
+    private bool isInputDevices = false;
     [DefaultValue(false)]
     private bool isDrStarted { get; set; }
     [DefaultValue(false)]
     private bool isPlayed { get; set; }
+    public GameObject boatMenu;
     public AudioClip greetingDialog;
     public AudioClip askgDialog;
     public AudioClip clearDialog;
     public AudioClip driveDialog;
     public GameObject thisCell;
     public GameObject driverDr;
- 
-    void FixedUpdate() 
+
+    void FixedUpdate()
     {
         if (BoatOneStatics.isTeleportCompleted)
         {
-
             if (!isSetUp)
             {
                 StartCoroutine(DriverStatics.RunAnimCo(gameObject, "isStandOnCell", res => isSetUp = res));
@@ -83,12 +87,24 @@ public class DriverAnimController : MonoBehaviour
                 }
                 if (isDrStarted)
                 {
-                    driverDr.SetActive(true);
-                    gameObject.SetActive(false);
+                    if (BoatOneStatics.isDrOptionsAuto)
+                    {
+                        driverDr.SetActive(true);
+                        gameObject.SetActive(false);
+                    }
                 }
             }
+
+            if (!isInputDevices)
+            {
+                isInputDevices = DriverStatics.GetInputDevices();
+            }
+            if (isInputDevices && boatMenu)
+            {
+                DriverStatics.ReactivateBoatMenu(boatMenu);
+            }
         }
-    }
+    }   
     private IEnumerator RepeatSpeech2Co()
     {
         if (BoatOneStatics.speechText.Split(' ')[0].ToString() != "yes")

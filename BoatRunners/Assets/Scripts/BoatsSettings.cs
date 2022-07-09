@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BoatsSettings : MonoBehaviour
 {
@@ -10,10 +12,33 @@ public class BoatsSettings : MonoBehaviour
     public GameObject driversOptions;
     public GameObject selfTourBtn;
     public GameObject driveTourBtn;
+    public GameObject restartBtn;
 
     void Start()
     {
-        gameObject.transform.position = new Vector3(-1f, gameObject.transform.position.y, gameObject.transform.position.z);
+        gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, gameObject.transform.localPosition.y, gameObject.transform.localPosition.z);
+    }
+    public void RestartGame()
+    {
+        //Application.Quit();
+        StartCoroutine(LoadCurrentAsyncScene());
+
+    }
+    IEnumerator LoadCurrentAsyncScene()
+    {
+        BoatOneStatics.isTeleportCompleted = false;
+        BoatOneStatics.isInBoatOne = false;
+        BoatOneStatics.isDriveBoatOne = false;
+        yield return new WaitUntil(() => 
+             !BoatOneStatics.isInBoatOne &&
+             !BoatOneStatics.isTeleportCompleted &&
+             !BoatOneStatics.isDriveBoatOne
+            );
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("BoatScene");
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
     }
     public void ActivateSelfTour()
     {
@@ -33,6 +58,7 @@ public class BoatsSettings : MonoBehaviour
             driversOptions.SetActive(true);
             selfTourBtn.SetActive(false);
             driveTourBtn.SetActive(false);
+            restartBtn.transform.localPosition = new Vector3(restartBtn.transform.localPosition.x, restartBtn.transform.localPosition.y - 9f, restartBtn.transform.localPosition.z);
         }
     }
     public void ActivateDriverDr()
@@ -40,7 +66,8 @@ public class BoatsSettings : MonoBehaviour
         if (driversOptions)
         {
             drivePoses.SetActive(true);
-            CheckStat(driveDr, driveInfo, driveMfd);
+            CheckStat(driveDr, driveInfo, driveMfd, res => BoatOneStatics.isDrOptionsDr = res);
+            
         }
     }
     public void ActivateDriverMFD()
@@ -48,7 +75,7 @@ public class BoatsSettings : MonoBehaviour
         if (driversOptions)
         {
             drivePoses.SetActive(true);
-            CheckStat(driveMfd, driveDr, driveInfo);
+            CheckStat(driveMfd, driveDr, driveInfo, res => BoatOneStatics.isDrOptionsMFD = res);
         }
     }
     public void ActivateDriverInfo()
@@ -56,7 +83,7 @@ public class BoatsSettings : MonoBehaviour
         if (driversOptions)
         {
             drivePoses.SetActive(true);
-            CheckStat(driveInfo, driveDr, driveMfd);
+            CheckStat(driveInfo, driveDr, driveMfd, res => BoatOneStatics.isDrOptionsInfo = res);
         }
     }
     public void ActivateDriverAuto()
@@ -67,17 +94,19 @@ public class BoatsSettings : MonoBehaviour
             if (drivePoses.activeInHierarchy)
             {
                 //work on
+                //BoatOneStatics.isDrOptionsAuto = true;
                 gameObject.SetActive(false);
             }
         }
     }
-    private void CheckStat(GameObject toCheck, GameObject statOne, GameObject statTwo)
+    private void CheckStat(GameObject toCheck, GameObject statOne, GameObject statTwo, Action<bool> thisBool)
     {
         if (drivePoses.activeInHierarchy)
         {
             toCheck.SetActive(true);
             statOne.SetActive(false);
             statTwo.SetActive(false);
+            thisBool(true);
             Debug.Log("driverstat2" + toCheck.activeSelf);
             gameObject.SetActive(false);
         }

@@ -4,6 +4,9 @@ public class DriverDriveAnim : MonoBehaviour
 {
     public GameObject walkAnim;
     public GameObject thisSeat;
+    public GameObject boatMenu;
+    private bool isInputDevices = false;
+
     private void FixedUpdate()
     {
         if (BoatOneStatics.isTeleportCompleted)
@@ -19,6 +22,18 @@ public class DriverDriveAnim : MonoBehaviour
             {
                 StartCoroutine(DriverStatics.MoveDriveToWalkAnimCo(gameObject, walkAnim));
             }
+            if (!isInputDevices)
+            {
+                isInputDevices = DriverStatics.GetInputDevices();
+            }
+            if (isInputDevices && boatMenu)
+            {
+                DriverStatics.ReactivateBoatMenu(boatMenu);
+            }
         }
+        //else
+        //{
+        //    
+        //}
     }
 }

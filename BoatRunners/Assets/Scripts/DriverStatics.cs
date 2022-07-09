@@ -1,6 +1,9 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.XR;
 
 public static class DriverStatics {
 
@@ -10,7 +13,12 @@ public static class DriverStatics {
     private static bool isEnabed = false;
     private static bool isRun = false;
     public static bool isThisBoat = false;
+    private static bool isTest = false;
     public static allBoats boatNames;
+    [DefaultValue(false)]
+    public static bool isInputList{get;set;}
+    private static bool primaryBtnValue = false;
+    private static List<InputDevice> inputDevices = new List<InputDevice>();
     public enum allBoats { boatOne, boatTwo};
 
     public static void EnableAnimatorAudio(GameObject thisObj)
@@ -170,6 +178,51 @@ public static class DriverStatics {
         
             thisBool = true;
         }
+    }
+    public static bool GetInputDevices()
+    {
+        if (!isInputList)
+        {
+            InputDevices.GetDevicesWithCharacteristics(InputDeviceCharacteristics.Left,inputDevices);
+            if (inputDevices.Count > 0)
+            {
+                isInputList = true;   
+            }
+            return isInputList;
+        }
+        return isInputList;
+
+    }
+    public static void ReactivateBoatMenu(GameObject thisMenu)
+    {
+        
+        if (isInputList)
+        {
+            foreach (var device in inputDevices)
+            {
+                isTest = device.TryGetFeatureValue(CommonUsages.primaryButton, out primaryBtnValue);
+            }
+            if (primaryBtnValue)
+            {
+                if (thisMenu)
+                {
+                    BoatOneStatics.isDrOptionsDr = false;
+                    BoatOneStatics.isDrOptionsInfo = false;
+                    BoatOneStatics.isDrOptionsMFD = false;
+                    BoatOneStatics.isDrOptionsAuto = false;
+                    isInputList = false;
+                    inputDevices = new List<InputDevice>();
+                    if (!BoatOneStatics.isDrOptionsDr && !BoatOneStatics.isDrOptionsInfo &&
+                        !BoatOneStatics.isDrOptionsMFD && !BoatOneStatics.isDrOptionsAuto &&
+                        !isInputList && inputDevices.Count == 0)
+                    {
+                       
+                        thisMenu.SetActive(true);
+                    }
+                }
+            }
+        }
+       
     }
 }
 

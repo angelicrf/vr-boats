@@ -40,4 +40,13 @@ public static class BoatOneStatics
     public static bool isMenuActivated { get; set; }
     [DefaultValue(false)]
     public static bool isDriverAsked { get; set; }
+    [DefaultValue(false)]
+    public static bool isDrOptionsDr { get; set; }
+    [DefaultValue(false)]
+    public static bool isDrOptionsInfo { get; set; }
+    [DefaultValue(false)]
+    public static bool isDrOptionsMFD { get; set; }
+    [DefaultValue(false)]
+    public static bool isDrOptionsAuto { get; set; }
+
 }

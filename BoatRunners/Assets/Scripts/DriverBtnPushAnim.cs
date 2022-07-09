@@ -12,6 +12,8 @@ public class DriverBtnPushAnim : MonoBehaviour
     private bool isNextStep = false;
     private bool isFirstStep = false;
     private bool isAnimOnce = false;
+    private bool isInputDevices = false;
+    public GameObject boatMenu;
 
     public AudioClip lightSystem;
     void FixedUpdate()
@@ -39,7 +41,15 @@ public class DriverBtnPushAnim : MonoBehaviour
             {
                 DefineBoatState(DriverStatics.boatNames);
             }
-         }
+            if (!isInputDevices)
+            {
+                isInputDevices = DriverStatics.GetInputDevices();
+            }
+            if (isInputDevices && boatMenu)
+            {
+                DriverStatics.ReactivateBoatMenu(boatMenu);
+            }
+        }
     }
     private void DefineBoatState(DriverStatics.allBoats op)
     { 

@@ -9,7 +9,7 @@ public class MoveBoat : MonoBehaviour
     public float speed;
     private void FixedUpdate()
     {
-        if (BoatOneStatics.isInBoatOne)
+        if (BoatOneStatics.isTeleportCompleted)
         {
             var inputDevices = new List<InputDevice>();
             InputDevices.GetDevices(inputDevices);

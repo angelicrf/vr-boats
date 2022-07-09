@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/BoatScene.unity
-    guid: d1c3109bdb54ad54c8a2b2838528e640
+    path: Assets/Prefabs/BoatScene.unity
+    guid: f4fc660ad7cf6eb4eb8cd6d109f7608e
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 8430c90cebafeed42947fd209117594a, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 3f7def42deb769640a4b1ca8b4663a75, type: 2}
