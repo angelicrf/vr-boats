@@ -25,9 +25,13 @@ public class DriverDriveAnim : MonoBehaviour
                         StartCoroutine(MakeTimeChanges());
                     }
                 }
+                if (isEntered)
+                {
+                    gameObject.transform.localPosition = new Vector3(thisSeat.transform.localPosition.x - 0.1f, -1.24f, thisSeat.transform.localPosition.z + 0.65f);
+                }
                 StartCoroutine(DriverStatics.MoveToDriveAnimCo(gameObject, "isDriving", res => BoatOneStatics.isDriveBoatOne = res));
             }
-            if (BoatOneStatics.isBoatOneStartDrive && !BoatOneStatics.isDriveBoatOne)
+            if (BoatOneStatics.isBoatOneStartDrive && !BoatOneStatics.isDriveBoatOne && BoatOneStatics.isDrOptionsAuto)
             {
                 StartCoroutine(DriverStatics.MoveDriveToWalkAnimCo(gameObject, walkAnim));
             }
@@ -47,9 +51,11 @@ public class DriverDriveAnim : MonoBehaviour
     }
     private IEnumerator MakeTimeChanges()
     {
+        
         gameObject.transform.localPosition = new Vector3(thisSeat.transform.localPosition.x - 0.1f, 0, thisSeat.transform.localPosition.z + 0.65f);
         yield return new WaitForSeconds(2f);
         gameObject.transform.localPosition = new Vector3(thisSeat.transform.localPosition.x - 0.1f, -1.24f, thisSeat.transform.localPosition.z + 0.65f);
         isEntered = true;
     }
+   
 }

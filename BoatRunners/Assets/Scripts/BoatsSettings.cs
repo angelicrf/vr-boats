@@ -9,6 +9,7 @@ public class BoatsSettings : MonoBehaviour
     public GameObject driveDr;
     public GameObject driveInfo;
     public GameObject driveMfd;
+    public GameObject driverStr;
     public GameObject driversOptions;
     public GameObject selfTourBtn;
     public GameObject driveTourBtn;
@@ -91,10 +92,10 @@ public class BoatsSettings : MonoBehaviour
         if (driversOptions)
         {
             drivePoses.SetActive(true);
-            if (drivePoses.activeInHierarchy)
+            if (drivePoses.activeInHierarchy && driverStr)
             {
-                //work on
-                //BoatOneStatics.isDrOptionsAuto = true;
+                BoatOneStatics.isDrOptionsAuto = true;
+                driverStr.SetActive(true);
                 gameObject.SetActive(false);
             }
         }
