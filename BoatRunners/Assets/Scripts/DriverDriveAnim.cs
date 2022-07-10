@@ -15,7 +15,8 @@ public class DriverDriveAnim : MonoBehaviour
             
         {
             gameObject.transform.localRotation = Quaternion.Euler(0,0,0);
-            
+            gameObject.transform.localPosition = new Vector3(thisSeat.transform.localPosition.x - 0.1f, -1.24f, thisSeat.transform.localPosition.z + 0.65f);
+
             if (!BoatOneStatics.isBoatOneStartDrive)
             {
                 if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Start"))
@@ -24,10 +25,6 @@ public class DriverDriveAnim : MonoBehaviour
                     {
                         StartCoroutine(MakeTimeChanges());
                     }
-                }
-                if (isEntered)
-                {
-                    gameObject.transform.localPosition = new Vector3(thisSeat.transform.localPosition.x - 0.1f, -1.24f, thisSeat.transform.localPosition.z + 0.65f);
                 }
                 StartCoroutine(DriverStatics.MoveToDriveAnimCo(gameObject, "isDriving", res => BoatOneStatics.isDriveBoatOne = res));
             }
@@ -44,14 +41,9 @@ public class DriverDriveAnim : MonoBehaviour
                 DriverStatics.ReactivateBoatMenu(boatMenu);
             }
         }
-        //else
-        //{
-        //    
-        //}
     }
     private IEnumerator MakeTimeChanges()
     {
-        
         gameObject.transform.localPosition = new Vector3(thisSeat.transform.localPosition.x - 0.1f, 0, thisSeat.transform.localPosition.z + 0.65f);
         yield return new WaitForSeconds(2f);
         gameObject.transform.localPosition = new Vector3(thisSeat.transform.localPosition.x - 0.1f, -1.24f, thisSeat.transform.localPosition.z + 0.65f);
