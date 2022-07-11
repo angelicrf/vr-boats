@@ -6,7 +6,11 @@ using UnityEngine.UI;
 public class LoadingSplash : MonoBehaviour
 {
     public GameObject sliderObj;
+    public GameObject splashcam;
+    public GameObject splashAnim;
+    public GameObject splashPlayer;
     private bool isLoaded = false;
+    private bool isTransited = false;
     void FixedUpdate()
     {
         LoadSplashScene();
@@ -14,11 +18,11 @@ public class LoadingSplash : MonoBehaviour
     private void LoadSplashScene()
     {
 
-        if (sliderObj.GetComponent<Scrollbar>().value <= 1)
+        if (sliderObj.GetComponent<Slider>().value <= sliderObj.GetComponent<Slider>().maxValue)
         {
-            sliderObj.GetComponent<Scrollbar>().value += gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime * 0.0042f;
+            sliderObj.GetComponent<Slider>().value += splashAnim.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime * 0.042f;
         }
-        if (sliderObj.GetComponent<Scrollbar>().value > 1 && !isLoaded)
+        if (sliderObj.GetComponent<Slider>().value == sliderObj.GetComponent<Slider>().maxValue && !isLoaded)
         {
             isLoaded = true;
         }
@@ -29,9 +33,16 @@ public class LoadingSplash : MonoBehaviour
     }
     private IEnumerator SceneSwitch()
     {
-        Debug.Log("isLoaded");
-        SceneManager.LoadScene("BoatScene", LoadSceneMode.Additive);
-        yield return null;
+        if (!isTransited)
+        {
+            SceneManager.LoadScene("BoatScene");
+            splashPlayer.SetActive(false);
+            if (!splashPlayer.activeSelf)
+            {
+                isTransited = true;
+            }
+        }
+        yield return new WaitUntil(() => isTransited);
         SceneManager.UnloadSceneAsync("SplashScene");
     }
 }
