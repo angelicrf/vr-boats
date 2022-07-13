@@ -12,8 +12,10 @@ public class AvatarDesign : MonoBehaviour
     public GameObject frameModel;
     public GameObject avatarsImg;
     public GameObject avatarCanvas;
+    public GameObject avatarReviews;
     public GameObject canvAvtImg;
     public GameObject canvAvtText;
+    public GameObject avatarsCanvas;
     private GameObject emptyObj;
     private GameObject emptyFrame;
     private float xOrig = -17f;
@@ -26,6 +28,7 @@ public class AvatarDesign : MonoBehaviour
     private float zFOrig;
     //= -19.899f;
     private bool isAvtClicked = false;
+    private bool isRvClicked = false;
     private void Start()
     {
         avatars = new List<Avatar>();
@@ -122,6 +125,50 @@ public class AvatarDesign : MonoBehaviour
         else if (!isAvtClicked)
         {
             avatarCanvas.SetActive(false);
+        }
+    }
+    public void AvatarImageClick()
+    {
+        isRvClicked = !isRvClicked;
+        if (isRvClicked)
+        {
+            if (avatarsCanvas)
+            {
+                avatarsCanvas.SetActive(false);
+                if (avatarReviews)
+                {
+                    avatarReviews.SetActive(true);
+                }
+                for (int i = 1; i < 7; i++)
+                {
+                    if (gameObject.transform.Find($"avtImage{i}") && gameObject.transform.Find($"avtFrame{i}"))
+                    {
+                        gameObject.transform.Find($"avtImage{i}").transform.gameObject.SetActive(false);
+                        gameObject.transform.Find($"avtFrame{i}").transform.gameObject.SetActive(false);
+                    }
+                }
+               
+            }
+        }
+        else
+        {
+            if (avatarsCanvas)
+            {
+                avatarsCanvas.SetActive(true);
+                if (avatarReviews)
+                {
+                    avatarReviews.SetActive(false);
+                }
+                for (int i = 1; i < 7; i++)
+                {
+                    if (gameObject.transform.Find($"avtImage{i}") && gameObject.transform.Find($"avtFrame{i}"))
+                    {
+                        gameObject.transform.Find($"avtImage{i}").transform.gameObject.SetActive(true);
+                        gameObject.transform.Find($"avtFrame{i}").transform.gameObject.SetActive(true);
+                    }
+                }
+            }
+
         }
     }
     public void ClothesIcon()
