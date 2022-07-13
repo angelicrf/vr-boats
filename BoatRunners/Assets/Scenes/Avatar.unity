@@ -3995,6 +3995,11 @@ MonoBehaviour:
   canvAvtImg: {fileID: 311402492}
   canvAvtText: {fileID: 248033030}
   avatarsCanvas: {fileID: 0}
+  rvTextOne: {fileID: 0}
+  rvTextTwo: {fileID: 0}
+  rvTextThree: {fileID: 0}
+  rvTextFour: {fileID: 0}
+  rvTextFive: {fileID: 0}
 --- !u!114 &1718274798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4125,6 +4130,11 @@ MonoBehaviour:
   canvAvtImg: {fileID: 0}
   canvAvtText: {fileID: 0}
   avatarsCanvas: {fileID: 0}
+  rvTextOne: {fileID: 0}
+  rvTextTwo: {fileID: 0}
+  rvTextThree: {fileID: 0}
+  rvTextFour: {fileID: 0}
+  rvTextFive: {fileID: 0}
 --- !u!114 &1756183721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4670,6 +4680,11 @@ MonoBehaviour:
   canvAvtImg: {fileID: 0}
   canvAvtText: {fileID: 0}
   avatarsCanvas: {fileID: 1718274796}
+  rvTextOne: {fileID: 1320198962}
+  rvTextTwo: {fileID: 169419681}
+  rvTextThree: {fileID: 1911207551}
+  rvTextFour: {fileID: 793556623}
+  rvTextFive: {fileID: 1893048000}
 --- !u!1 &1869073245
 GameObject:
   m_ObjectHideFlags: 0

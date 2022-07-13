@@ -4,9 +4,7 @@ using UnityEngine.UI;
 
 public class AvatarDesign : MonoBehaviour
 {
-    private List<Avatar> avatars;
-    private Avatar avatar;
-
+    //private Avatar avatar;
     public List<Sprite> avtSprites;
     public Sprite avtFrame;
     public GameObject frameModel;
@@ -16,6 +14,13 @@ public class AvatarDesign : MonoBehaviour
     public GameObject canvAvtImg;
     public GameObject canvAvtText;
     public GameObject avatarsCanvas;
+
+    public GameObject rvTextOne;
+    public GameObject rvTextTwo;
+    public GameObject rvTextThree;
+    public GameObject rvTextFour;
+    public GameObject rvTextFive;
+
     private GameObject emptyObj;
     private GameObject emptyFrame;
     private float xOrig = -17f;
@@ -31,14 +36,13 @@ public class AvatarDesign : MonoBehaviour
     private bool isRvClicked = false;
     private void Start()
     {
-        avatars = new List<Avatar>();
+
         if (frameModel)
         {
             xFOrig = frameModel.transform.position.x;
             yFOrig = frameModel.transform.position.y;
             zFOrig = frameModel.transform.position.z;
         }
-
         if (avtSprites.Count > 0)
         {
             for (int i = 1; i < 7; i++)
@@ -72,33 +76,33 @@ public class AvatarDesign : MonoBehaviour
                     switch (i)
                     {
                         case 1:
-                            avatar = new Avatar(i, "Matt", "Recommened Driver", avtSprites[i-1]);
-                            avatars.Add(avatar);
+                            //avatar = new Avatar(i, "Matt", "Recommened Driver", avtSprites[i-1], new List<string>());
+                            //DupAvatar.dupAvatrs.Add(avatar);
                             emptyObj.GetComponent<Button>().onClick.AddListener(delegate { OnClickImg(1); });
                             break;
                         case 2:
-                            avatar = new Avatar(i,"Robert", "High Skilled Driver", avtSprites[i-1]);
-                            avatars.Add(avatar);
+                            //avatar = new Avatar(i,"Robert", "High Skilled Driver", avtSprites[i-1], new List<string>());
+                            //DupAvatar.dupAvatrs.Add(avatar);
                             emptyObj.GetComponent<Button>().onClick.AddListener(delegate { OnClickImg(2); });
                             break;
                         case 3:
-                            avatar = new Avatar(i,"Dave", "Professional Driver", avtSprites[i-1]);
-                            avatars.Add(avatar);
+                            //avatar = new Avatar(i,"Dave", "Professional Driver", avtSprites[i-1], new List<string>());
+                            //DupAvatar.dupAvatrs.Add(avatar);
                             emptyObj.GetComponent<Button>().onClick.AddListener(delegate { OnClickImg(3); });
                             break;
                         case 4:
-                            avatar = new Avatar(i,"Bryan", "Experienced Driver", avtSprites[i-1]);
-                            avatars.Add(avatar);
+                            //avatar = new Avatar(i,"Bryan", "Experienced Driver", avtSprites[i-1], new List<string>());
+                            //DupAvatar.dupAvatrs.Add(avatar);
                             emptyObj.GetComponent<Button>().onClick.AddListener(delegate { OnClickImg(4); });
                             break;
                         case 5:
-                            avatar = new Avatar(i,"Lisa", "Trusted Driver", avtSprites[i-1]);
-                            avatars.Add(avatar);
+                            //avatar = new Avatar(i,"Lisa", "Trusted Driver", avtSprites[i-1], new List<string>());
+                            //DupAvatar.dupAvatrs.Add(avatar);
                             emptyObj.GetComponent<Button>().onClick.AddListener(delegate { OnClickImg(5); });
                             break;
                         case 6:
-                            avatar = new Avatar(i,"Tanya", "Safe Driver", avtSprites[i-1]);
-                            avatars.Add(avatar);
+                            //avatar = new Avatar(i,"Tanya", "Safe Driver", avtSprites[i-1], new List<string>());
+                            //DupAvatar.dupAvatrs.Add(avatar);
                             emptyObj.GetComponent<Button>().onClick.AddListener(delegate { OnClickImg(6); });
                             break;
                     }
@@ -113,12 +117,16 @@ public class AvatarDesign : MonoBehaviour
         if (avatarCanvas && isAvtClicked)
         {
             avatarCanvas.SetActive(true);
-            for (int i = 0; i < avatars.Count; i++)
+            for (int i = 0; i < DupAvatar.avatarsList.Count; i++)
             {
-                if (avatars.Count > 0 && canvAvtImg && canvAvtText && avatars[i].AvatarId == thisId)
+                if (canvAvtImg && canvAvtText && DupAvatar.avatarsList[i].AvatarId == thisId)
                 {
-                    canvAvtText.GetComponent<Text>().text = avatars[i].AvatarDesc;
-                    canvAvtImg.GetComponent<Image>().sprite = avatars[i].AvatarSprite;
+                    DupAvatar.avtCurrentId = thisId;
+                    i = thisId -1;
+                    DupAvatar.avatarsList[i].AvatarSprite = avtSprites[i];
+                    canvAvtText.GetComponent<Text>().text = DupAvatar.avatarsList[i].AvatarDesc;
+                    canvAvtImg.GetComponent<Image>().sprite = DupAvatar.avatarsList[i].AvatarSprite;
+                    break;
                 }
             }
         }
@@ -138,6 +146,40 @@ public class AvatarDesign : MonoBehaviour
                 if (avatarReviews)
                 {
                     avatarReviews.SetActive(true);
+                    if (rvTextOne && rvTextTwo && rvTextThree && rvTextFour && rvTextFive)
+                    {
+                        //Debug.Log(DupAvatar.avatarsList.Count);
+                        for (int i = 0; i < 6; i++)
+                        {
+                            if (DupAvatar.avtCurrentId == 1)
+                            {
+                                i = 0;
+                            }
+                            else if (DupAvatar.avtCurrentId == 2)
+                            {
+                                i = 1;
+                            }
+                            else if (DupAvatar.avtCurrentId == 3)
+                            {
+                                i = 3;
+                            }
+                            else if (DupAvatar.avtCurrentId == 4)
+                            {
+                                i = 4;
+                            }
+                            else if (DupAvatar.avtCurrentId == 5)
+                            {
+                                i = 5;
+                            }
+                            rvTextOne.GetComponent<Text>().text = $"{DupAvatar.avatarsList[i].AvatarId} Comment: {DupAvatar.avatarsList[i].AvatarName} is " + DupAvatar.avatarsList[i].allCommentTest[0];
+                            rvTextTwo.GetComponent<Text>().text = $"{DupAvatar.avatarsList[i].AvatarId} Comment: {DupAvatar.avatarsList[i].AvatarName} is " + DupAvatar.avatarsList[i].allCommentTest[1];
+                            rvTextThree.GetComponent<Text>().text = $"{DupAvatar.avatarsList[i].AvatarId} Comment: {DupAvatar.avatarsList[i].AvatarName}" + DupAvatar.avatarsList[i].allCommentTest[2];
+                            rvTextFour.GetComponent<Text>().text = $"{DupAvatar.avatarsList[i].AvatarId} Comment: {DupAvatar.avatarsList[i].AvatarName}" + DupAvatar.avatarsList[i].allCommentTest[3];
+                            rvTextFive.GetComponent<Text>().text = $"{DupAvatar.avatarsList[i].AvatarId} Comment: {DupAvatar.avatarsList[i].AvatarName}" + DupAvatar.avatarsList[i].allCommentTest[4];
+                            break;
+                        }
+                    }
+
                 }
                 for (int i = 1; i < 7; i++)
                 {
@@ -168,6 +210,7 @@ public class AvatarDesign : MonoBehaviour
                     }
                 }
             }
+            gameObject.SetActive(false);
 
         }
     }
