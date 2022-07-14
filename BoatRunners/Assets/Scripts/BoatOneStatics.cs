@@ -48,5 +48,5 @@ public static class BoatOneStatics
     public static bool isDrOptionsMFD { get; set; }
     [DefaultValue(false)]
     public static bool isDrOptionsAuto { get; set; }
-
+   
 }

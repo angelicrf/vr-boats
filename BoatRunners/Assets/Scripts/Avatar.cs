@@ -1,8 +1,35 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public static class DupAvatar {
+
+    [DefaultValue(false)]
+    public static bool isCapselected { get; set; }
+    [DefaultValue(false)]
+    public static bool isSGSelected { get; set; }
+    [DefaultValue(false)]
+    public static bool isShoeOne { get; set; }
+    [DefaultValue(false)]
+    public static bool isShoeTwo { get; set; }
+
+    [DefaultValue(false)]
+    public static bool isShirtOne { get; set; }
+    [DefaultValue(false)]
+    public static bool isShirtTwo { get; set; }
+    [DefaultValue(false)]
+    public static bool isShortOne { get; set; }
+    [DefaultValue(false)]
+    public static bool isShortTwo { get; set; }
+    [DefaultValue(false)]
+    public static bool isAccessories { get; set; }
+    [DefaultValue(false)]
+    public static bool isButtom { get; set; }
+    [DefaultValue(false)]
+    public static bool isTop { get; set; }
+    [DefaultValue(false)]
+    public static bool isShoes { get; set; }
 
     private static Sprite spOne, spTwo, spThree, spFour, spFive,spSix;
     public static List<Avatar> dupAvatrs = new List<Avatar>();

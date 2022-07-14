@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.XR;
 
 public static class DriverStatics {
-
+  
     private static bool ReturnValue = false;
     private static bool ReturnFirstValue = false;
     private static bool ReturnSecondValue = false;

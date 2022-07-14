@@ -6,6 +6,10 @@ public class AvatarDesign : MonoBehaviour
 {
     //private Avatar avatar;
     public List<Sprite> avtSprites;
+    public List<Texture> clAccessSprites;
+    public List<Texture> clShoesSprites;
+    public List<Texture> clTopSprites;
+    public List<Texture> clButtomSprites;
     public Sprite avtFrame;
     public GameObject frameModel;
     public GameObject avatarsImg;
@@ -14,6 +18,12 @@ public class AvatarDesign : MonoBehaviour
     public GameObject canvAvtImg;
     public GameObject canvAvtText;
     public GameObject avatarsCanvas;
+    public GameObject clCanvas;
+    public GameObject clText;
+    public GameObject clImageOne;
+    public GameObject clImageTwo;
+    public GameObject clOneToggle;
+    public GameObject clTwoToggle;
 
     public GameObject rvTextOne;
     public GameObject rvTextTwo;
@@ -21,6 +31,10 @@ public class AvatarDesign : MonoBehaviour
     public GameObject rvTextFour;
     public GameObject rvTextFive;
 
+    public GameObject defAccess;
+    public GameObject defTop;
+    public GameObject defPant;
+    public GameObject defShoes;
     private GameObject emptyObj;
     private GameObject emptyFrame;
     private float xOrig = -17f;
@@ -34,6 +48,8 @@ public class AvatarDesign : MonoBehaviour
     //= -19.899f;
     private bool isAvtClicked = false;
     private bool isRvClicked = false;
+   
+
     private void Start()
     {
 
@@ -171,11 +187,11 @@ public class AvatarDesign : MonoBehaviour
                             {
                                 i = 5;
                             }
-                            rvTextOne.GetComponent<Text>().text = $"{DupAvatar.avatarsList[i].AvatarId} Comment: {DupAvatar.avatarsList[i].AvatarName} is " + DupAvatar.avatarsList[i].allCommentTest[0];
-                            rvTextTwo.GetComponent<Text>().text = $"{DupAvatar.avatarsList[i].AvatarId} Comment: {DupAvatar.avatarsList[i].AvatarName} is " + DupAvatar.avatarsList[i].allCommentTest[1];
-                            rvTextThree.GetComponent<Text>().text = $"{DupAvatar.avatarsList[i].AvatarId} Comment: {DupAvatar.avatarsList[i].AvatarName}" + DupAvatar.avatarsList[i].allCommentTest[2];
-                            rvTextFour.GetComponent<Text>().text = $"{DupAvatar.avatarsList[i].AvatarId} Comment: {DupAvatar.avatarsList[i].AvatarName}" + DupAvatar.avatarsList[i].allCommentTest[3];
-                            rvTextFive.GetComponent<Text>().text = $"{DupAvatar.avatarsList[i].AvatarId} Comment: {DupAvatar.avatarsList[i].AvatarName}" + DupAvatar.avatarsList[i].allCommentTest[4];
+                            rvTextOne.GetComponent<Text>().text = $" {DupAvatar.avatarsList[i].AvatarId} Comment: {DupAvatar.avatarsList[i].AvatarName} is " + DupAvatar.avatarsList[i].allCommentTest[0];
+                            rvTextTwo.GetComponent<Text>().text = $" {DupAvatar.avatarsList[i].AvatarId} Comment: {DupAvatar.avatarsList[i].AvatarName} is " + DupAvatar.avatarsList[i].allCommentTest[1];
+                            rvTextThree.GetComponent<Text>().text = $" {DupAvatar.avatarsList[i].AvatarId} Comment: {DupAvatar.avatarsList[i].AvatarName} " + DupAvatar.avatarsList[i].allCommentTest[2];
+                            rvTextFour.GetComponent<Text>().text = $" {DupAvatar.avatarsList[i].AvatarId} Comment: {DupAvatar.avatarsList[i].AvatarName} " + DupAvatar.avatarsList[i].allCommentTest[3];
+                            rvTextFive.GetComponent<Text>().text = $" {DupAvatar.avatarsList[i].AvatarId} Comment: {DupAvatar.avatarsList[i].AvatarName} " + DupAvatar.avatarsList[i].allCommentTest[4];
                             break;
                         }
                     }
@@ -220,19 +236,255 @@ public class AvatarDesign : MonoBehaviour
     }
     public void AccessoriesBtn()
     {
-        Debug.Log("btnAccessories..");
+       DupAvatar.isAccessories = !DupAvatar.isAccessories;
+        DupAvatar.isButtom = false;
+        DupAvatar.isTop = false;
+        DupAvatar.isShoes = false;
+        if (DupAvatar.isAccessories)
+        {
+            if (clCanvas && clText && clImageOne && clImageTwo && clOneToggle && clTwoToggle &&clAccessSprites.Count > 0)
+            {
+                clOneToggle.GetComponent<Toggle>().isOn = false;
+                clTwoToggle.GetComponent<Toggle>().isOn = false;
+                clCanvas.SetActive(true);
+                clText.SetActive(true);
+                clImageOne.SetActive(true);
+                clImageTwo.SetActive(true);
+                clOneToggle.SetActive(true);
+                clTwoToggle.SetActive(true);
+                clText.GetComponent<Text>().text = "Accessories";
+                clImageOne.GetComponent<RawImage>().texture = clAccessSprites[0];
+                clImageTwo.GetComponent<RawImage>().texture = clAccessSprites[1];
+            }
+        }
+        else
+        {
+            clCanvas.SetActive(false);
+        }
+    }
+    public void ToggleOneClick()
+    {
+        if (DupAvatar.isAccessories)
+        {
+            DupAvatar.isSGSelected = true;
+            if (!clOneToggle.GetComponent<Toggle>().isOn)
+            {
+                DupAvatar.isSGSelected = false;
+            }
+  
+        }else if (DupAvatar.isButtom)
+        {
+            DupAvatar.isShortOne = true;
+            if (!clOneToggle.GetComponent<Toggle>().isOn)
+            {
+                DupAvatar.isShortOne = false;
+            }
+        }else if (DupAvatar.isTop)
+        {
+            DupAvatar.isShirtOne = true;
+            if (!clOneToggle.GetComponent<Toggle>().isOn)
+            {
+                DupAvatar.isShirtOne = false;
+            }
+   
+        }else if (DupAvatar.isShoes)
+        {
+            DupAvatar.isShoeOne = true;
+            if (!clOneToggle.GetComponent<Toggle>().isOn)
+            {
+                DupAvatar.isShoeOne = false;
+            }
+        }
+      
+        if (DupAvatar.isSGSelected && DupAvatar.isAccessories)
+        {
+            defAccess.GetComponent<Text>().text = "Sunglasses";
+        }
+        else if(!DupAvatar.isSGSelected && DupAvatar.isAccessories)
+        {
+            defAccess.GetComponent<Text>().text = "Access";
+        }
+        if (DupAvatar.isShirtOne && DupAvatar.isTop)
+        {
+            defTop.GetComponent<Text>().text = "ShirtOne";
+        }
+        else if (!DupAvatar.isShirtOne && DupAvatar.isTop)
+        {
+            defTop.GetComponent<Text>().text = "Top";
+        }
+
+        if (DupAvatar.isShoeOne && DupAvatar.isShoes)
+        {
+            defShoes.GetComponent<Text>().text = "ShoeOne";
+        }
+        else if (!DupAvatar.isShoeOne && DupAvatar.isShoes)
+        {
+            defShoes.GetComponent<Text>().text = "Shoes";
+        }
+
+        if (DupAvatar.isShortOne && DupAvatar.isButtom)
+        {
+            defPant.GetComponent<Text>().text = "ShortOne";
+        }
+        else if (!DupAvatar.isShortOne && DupAvatar.isButtom)
+        {
+            defPant.GetComponent<Text>().text = "Pant";
+        }
+
+    }
+    public void ToggleTwoClick()
+    {
+        if (DupAvatar.isAccessories)
+        {
+            DupAvatar.isCapselected = true;
+            if (!clTwoToggle.GetComponent<Toggle>().isOn)
+            {
+                DupAvatar.isCapselected = false;
+            }
+        }
+        else if (DupAvatar.isButtom)
+        {
+            DupAvatar.isShortTwo = true;
+            if (!clTwoToggle.GetComponent<Toggle>().isOn)
+            {
+                DupAvatar.isShortTwo = false;
+            }
+        }
+        else if (DupAvatar.isTop)
+        {
+            DupAvatar.isShirtTwo = true;
+            if (!clTwoToggle.GetComponent<Toggle>().isOn)
+            {
+                DupAvatar.isShirtTwo = false;
+            }
+        }
+        else if (DupAvatar.isShoes)
+        {
+            DupAvatar.isShoeTwo = true;
+            if (!clTwoToggle.GetComponent<Toggle>().isOn)
+            {
+                DupAvatar.isShoeTwo = false;
+            }
+
+        }
+        if (DupAvatar.isCapselected && DupAvatar.isAccessories)
+        {
+            defAccess.GetComponent<Text>().text = "Cap";
+            Debug.Log(defAccess.GetComponent<Text>().text);
+        }
+        else if (!DupAvatar.isCapselected && DupAvatar.isAccessories)
+        {
+            defAccess.GetComponent<Text>().text = "Access";
+        }
+        if (DupAvatar.isShirtTwo && DupAvatar.isTop)
+        {
+            defTop.GetComponent<Text>().text = "ShirtTwo";
+        }
+        else if (!DupAvatar.isShortTwo && DupAvatar.isTop)
+        {
+            defTop.GetComponent<Text>().text = "Top";
+        }
+        if (DupAvatar.isShoeTwo && DupAvatar.isShoes)
+        {
+            defShoes.GetComponent<Text>().text = "ShoeTwo";
+        }
+        else if (!DupAvatar.isShoeTwo && DupAvatar.isShoes)
+        {
+            defShoes.GetComponent<Text>().text = "Shoes";
+        }
+        if (DupAvatar.isShortTwo && DupAvatar.isButtom)
+        {
+            defPant.GetComponent<Text>().text = "ShortTwo";
+        }
+        else if (!DupAvatar.isShortTwo && DupAvatar.isButtom)
+        {
+            defPant.GetComponent<Text>().text = "Pant";
+        }
     }
     public void ButtomBtn()
     {
-        Debug.Log("btnButtom..");
+        DupAvatar.isButtom = !DupAvatar.isButtom;
+        DupAvatar.isAccessories = false;
+        DupAvatar.isTop = false;
+        DupAvatar.isShoes = false;
+  
+        if (DupAvatar.isButtom)
+        {
+            if (clCanvas && clText && clImageOne && clImageTwo && clOneToggle && clTwoToggle && clButtomSprites.Count > 0)
+            {
+                clOneToggle.GetComponent<Toggle>().isOn = false;
+                clTwoToggle.GetComponent<Toggle>().isOn = false;
+                clCanvas.SetActive(true);
+                clText.SetActive(true);
+                clImageOne.SetActive(true);
+                clImageTwo.SetActive(true);
+                clOneToggle.SetActive(true);
+                clTwoToggle.SetActive(true);
+                clText.GetComponent<Text>().text = "Pants";
+                clImageOne.GetComponent<RawImage>().texture = clButtomSprites[0];
+                clImageTwo.GetComponent<RawImage>().texture = clButtomSprites[1];
+            }
+        }
+        else
+        {
+            clCanvas.SetActive(false);
+        }
     }
     public void TopBtn()
     {
-        Debug.Log("btnTop..");
+        DupAvatar.isTop = !DupAvatar.isTop;
+        DupAvatar.isAccessories = false;
+        DupAvatar.isButtom = false;
+        DupAvatar.isShoes = false;
+        if (DupAvatar.isTop)
+        {
+            if (clCanvas && clText && clImageOne && clImageTwo && clOneToggle && clTwoToggle && clTopSprites.Count > 0)
+            {
+                clOneToggle.GetComponent<Toggle>().isOn = false;
+                clTwoToggle.GetComponent<Toggle>().isOn = false;
+                clCanvas.SetActive(true);
+                clText.SetActive(true);
+                clImageOne.SetActive(true);
+                clImageTwo.SetActive(true);
+                clOneToggle.SetActive(true);
+                clTwoToggle.SetActive(true);
+                clText.GetComponent<Text>().text = "Shirts";
+                clImageOne.GetComponent<RawImage>().texture = clTopSprites[0];
+                clImageTwo.GetComponent<RawImage>().texture = clTopSprites[1];
+            }
+        }
+        else
+        {
+            clCanvas.SetActive(false);
+        }
     }
     public void ShoesBtn()
     {
-        Debug.Log("btnShoes..");
+        DupAvatar.isShoes = !DupAvatar.isShoes;
+        DupAvatar.isAccessories = false;
+        DupAvatar.isTop = false;
+        DupAvatar.isButtom = false;
+        if (DupAvatar.isShoes)
+        {
+            if (clCanvas && clText && clImageOne && clImageTwo && clOneToggle && clTwoToggle && clShoesSprites.Count > 0)
+            {
+                clOneToggle.GetComponent<Toggle>().isOn = false;
+                clTwoToggle.GetComponent<Toggle>().isOn = false;
+                clCanvas.SetActive(true);
+                clText.SetActive(true);
+                clImageOne.SetActive(true);
+                clImageTwo.SetActive(true);
+                clOneToggle.SetActive(true);
+                clTwoToggle.SetActive(true);
+                clText.GetComponent<Text>().text = "Shoes";
+                clImageOne.GetComponent<RawImage>().texture = clShoesSprites[0];
+                clImageTwo.GetComponent<RawImage>().texture = clShoesSprites[1];
+            }
+        }
+        else
+        {
+            clCanvas.SetActive(false);
+        }
     }
   
 }
