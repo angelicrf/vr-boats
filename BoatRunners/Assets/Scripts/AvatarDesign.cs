@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -52,7 +53,6 @@ public class AvatarDesign : MonoBehaviour
 
     private void Start()
     {
-
         if (frameModel)
         {
             xFOrig = frameModel.transform.position.x;
@@ -216,6 +216,10 @@ public class AvatarDesign : MonoBehaviour
                 if (avatarReviews)
                 {
                     avatarReviews.SetActive(false);
+                    if (clCanvas.activeSelf)
+                    {
+                        clCanvas.SetActive(false);
+                    }
                 }
                 for (int i = 1; i < 7; i++)
                 {
@@ -236,13 +240,13 @@ public class AvatarDesign : MonoBehaviour
     }
     public void AccessoriesBtn()
     {
-       DupAvatar.isAccessories = !DupAvatar.isAccessories;
+        DupAvatar.isAccessories = !DupAvatar.isAccessories;
         DupAvatar.isButtom = false;
         DupAvatar.isTop = false;
         DupAvatar.isShoes = false;
         if (DupAvatar.isAccessories)
         {
-            if (clCanvas && clText && clImageOne && clImageTwo && clOneToggle && clTwoToggle &&clAccessSprites.Count > 0)
+            if (clCanvas && clText && clImageOne && clImageTwo && clOneToggle && clTwoToggle && clAccessSprites.Count > 0)
             {
                 clOneToggle.GetComponent<Toggle>().isOn = false;
                 clTwoToggle.GetComponent<Toggle>().isOn = false;
@@ -261,6 +265,7 @@ public class AvatarDesign : MonoBehaviour
         {
             clCanvas.SetActive(false);
         }
+        //BtnsClick(DupAvatar.isAccessories, clAccessSprites, "Accessories", DupAvatar.isTop, DupAvatar.isButtom, DupAvatar.isShoes);
     }
     public void ToggleOneClick()
     {
@@ -407,7 +412,7 @@ public class AvatarDesign : MonoBehaviour
         DupAvatar.isAccessories = false;
         DupAvatar.isTop = false;
         DupAvatar.isShoes = false;
-  
+
         if (DupAvatar.isButtom)
         {
             if (clCanvas && clText && clImageOne && clImageTwo && clOneToggle && clTwoToggle && clButtomSprites.Count > 0)
@@ -429,6 +434,7 @@ public class AvatarDesign : MonoBehaviour
         {
             clCanvas.SetActive(false);
         }
+        //BtnsClick(DupAvatar.isButtom, clButtomSprites, "Pants", DupAvatar.isAccessories, DupAvatar.isTop, DupAvatar.isButtom);
     }
     public void TopBtn()
     {
@@ -457,6 +463,8 @@ public class AvatarDesign : MonoBehaviour
         {
             clCanvas.SetActive(false);
         }
+        //BtnsClick(DupAvatar.isTop, clTopSprites, "Shirts", DupAvatar.isAccessories, DupAvatar.isButtom, DupAvatar.isShoes);
+
     }
     public void ShoesBtn()
     {
@@ -485,6 +493,33 @@ public class AvatarDesign : MonoBehaviour
         {
             clCanvas.SetActive(false);
         }
+        //BtnsClick(DupAvatar.isShoes, clShoesSprites, "Shoes", DupAvatar.isAccessories, DupAvatar.isTop, DupAvatar.isButtom);
     }
-  
+    private void BtnsClick(bool boolOne, List<Texture> thisList, string thisStr, bool boolTwo = false, bool boolThree = false, bool boolFour = false)
+    {
+        boolOne = !boolOne;
+        //DupAvatar.isShoes = !DupAvatar.isShoes;
+
+        if (boolOne)
+        {
+            if (clCanvas && clText && clImageOne && clImageTwo && clOneToggle && clTwoToggle && thisList.Count > 0)
+            {
+                clOneToggle.GetComponent<Toggle>().isOn = false;
+                clTwoToggle.GetComponent<Toggle>().isOn = false;
+                clCanvas.SetActive(true);
+                clText.SetActive(true);
+                clImageOne.SetActive(true);
+                clImageTwo.SetActive(true);
+                clOneToggle.SetActive(true);
+                clTwoToggle.SetActive(true);
+                clText.GetComponent<Text>().text = thisStr;
+                clImageOne.GetComponent<RawImage>().texture = thisList[0];
+                clImageTwo.GetComponent<RawImage>().texture = thisList[1];
+            }
+        }
+        else
+        {
+            clCanvas.SetActive(false);
+        }
+    }
 }

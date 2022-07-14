@@ -1,3 +1,4 @@
+using MMLib.RapidPrototyping.Generators;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -41,79 +42,56 @@ public static class DupAvatar {
     public static List<Avatar> avatarsList = new List<Avatar>
         {
             new Avatar {
-                AvatarDesc = "test1", AvatarId = 1 , AvatarName = "Matt",
+                AvatarDesc =  WordGeneratorExample(), AvatarId = 1 , AvatarName = "Matt",
                 AvatarSprite = dupSprites[0]
                 ,
-                allCommentTest = new List<string>()
-                {
-                "is a nice Driver",
-                "made us fun",
-                "created a Fantastic day",
-                "has experinces",
-                "is knowledgable",
-                }
+                allCommentTest = ImplementList()
             },
-           new Avatar { 
-              AvatarDesc = "test2", AvatarId = 2 , AvatarName = "Robert",
+           new Avatar {
+              AvatarDesc =  WordGeneratorExample(), AvatarId = 2 , AvatarName = "Robert",
               AvatarSprite = dupSprites[1],
-              allCommentTest = new List<string>()
-                {
-                "is a nice Driver",
-                "made us fun",
-                "created a Fantastic day",
-                "has experinces",
-                "is knowledgable",
-                }
+              allCommentTest = ImplementList()
             },
-           new Avatar { 
-              AvatarDesc = "test3", AvatarId = 3 , AvatarName = "Dave",
+           new Avatar {
+              AvatarDesc =  WordGeneratorExample(), AvatarId = 3 , AvatarName = "Dave",
               AvatarSprite = dupSprites[2],
-              allCommentTest = new List<string>()
-                {
-                "is a nice Driver",
-                "made us fun",
-                "created a Fantastic day",
-                "has experinces",
-                "is knowledgable",
-                }
+              allCommentTest = ImplementList()
             },
            new Avatar {
-              AvatarDesc = "test4", AvatarId = 4 , AvatarName = "Bryan",
+              AvatarDesc =  WordGeneratorExample(), AvatarId = 4 , AvatarName = "Bryan",
               AvatarSprite = dupSprites[3],
-              allCommentTest = new List<string>()
-                {
-                "is a nice Driver",
-                "made us fun",
-                "created a Fantastic day",
-                "has experinces",
-                "is knowledgable",
-                }
+              allCommentTest = ImplementList()
             },
            new Avatar {
-              AvatarDesc = "test5", AvatarId = 5 , AvatarName = "Lisa",
+              AvatarDesc =  WordGeneratorExample(), AvatarId = 5 , AvatarName = "Lisa",
               AvatarSprite = dupSprites[4],
-              allCommentTest = new List<string>()
-                {
-                "is a nice Driver",
-                "made us fun",
-                "created a Fantastic day",
-                "has experinces",
-                "is knowledgable",
-                }
+              allCommentTest = ImplementList()
             },
              new Avatar {
-              AvatarDesc = "test6", AvatarId = 6 , AvatarName = "Tanya",
+              AvatarDesc =  WordGeneratorExample(), AvatarId = 6 , AvatarName = "Tanya",
               AvatarSprite = dupSprites[5],
-              allCommentTest = new List<string>()
-                {
-                "is a nice Driver",
-                "made us fun",
-                "created a Fantastic day",
-                "has experinces",
-                "is knowledgable",
-                }
+              allCommentTest = ImplementList()
             },
         };
+    private static string WordGeneratorExample()
+    {
+        WordGenerator generator = new WordGenerator();
+        var randomWord = generator.Next();
+        return randomWord;
+        //LoremIpsumGenerator loremIpsumGenerator = new LoremIpsumGenerator();
+        //var text = loremIpsumGenerator.Next(3, 3);
+    }
+    private static List<string> ImplementList()
+    {
+        return new List<string>()
+                {
+                 WordGeneratorExample(),
+                 WordGeneratorExample(),
+                 WordGeneratorExample(),
+                 WordGeneratorExample(),
+                 WordGeneratorExample(),
+                };
+    }
 }
 
 public class Avatar {
