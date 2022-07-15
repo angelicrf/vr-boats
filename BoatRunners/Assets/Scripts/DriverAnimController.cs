@@ -27,6 +27,8 @@ public class DriverAnimController : MonoBehaviour
     public AudioClip driveDialog;
     public GameObject thisCell;
     public GameObject driverDr;
+    public GameObject avtCap;
+    public GameObject avtSG;
 
     void FixedUpdate()
     {
@@ -34,6 +36,11 @@ public class DriverAnimController : MonoBehaviour
         {
             if (!isSetUp)
             {
+                //customize avatar
+                if (avtSG && avtCap)
+                {
+                    DupAvatar.CustomizeAvatar(avtCap, avtSG);
+                }
                 StartCoroutine(DriverStatics.RunAnimCo(gameObject, "isStandOnCell", res => isSetUp = res));
             }
 

@@ -14,12 +14,17 @@ public class DriverBtnPushAnim : MonoBehaviour
     private bool isAnimOnce = false;
     private bool isInputDevices = false;
     public GameObject boatMenu;
-
+    public GameObject avtCap;
+    public GameObject avtSG;
     public AudioClip lightSystem;
     void FixedUpdate()
     {
        if (BoatOneStatics.isTeleportCompleted)
        {
+            if (avtSG && avtCap)
+            {
+                DupAvatar.CustomizeAvatar(avtCap, avtSG);
+            }
             if (!isStartedBtn)
             {
                 StartCoroutine(DriverBTNCo());

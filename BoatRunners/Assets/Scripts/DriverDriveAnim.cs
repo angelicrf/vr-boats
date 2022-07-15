@@ -8,6 +8,8 @@ public class DriverDriveAnim : MonoBehaviour
     public GameObject boatMenu;
     private bool isInputDevices = false;
     private bool isEntered = false;
+    public GameObject avtCap;
+    public GameObject avtSG;
 
     private void FixedUpdate()
     {
@@ -16,7 +18,10 @@ public class DriverDriveAnim : MonoBehaviour
         {
             gameObject.transform.localRotation = Quaternion.Euler(0,0,0);
             gameObject.transform.localPosition = new Vector3(thisSeat.transform.localPosition.x - 0.1f, -1.24f, thisSeat.transform.localPosition.z + 0.65f);
-
+            if (avtSG && avtCap)
+            {
+                DupAvatar.CustomizeAvatar(avtCap, avtSG);
+            }
             if (!BoatOneStatics.isBoatOneStartDrive)
             {
                 if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Start"))

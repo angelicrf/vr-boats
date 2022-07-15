@@ -11,11 +11,17 @@ public class DriverStandAnim : MonoBehaviour
     public AudioClip driverStartInfo;
     public AudioClip driverAudioBtn;
     public GameObject driverBtn;
+    public GameObject avtCap;
+    public GameObject avtSG;
     private void FixedUpdate()
     {
 
         if (BoatOneStatics.isTeleportCompleted)
         {
+            if (avtSG && avtCap)
+            {
+                DupAvatar.CustomizeAvatar(avtCap, avtSG);
+            }
             if (!isDrStanding)
             {
                StartCoroutine(DriverStatics.MoveToWalkTalkAnimCo(gameObject, result => isDrStanding = result,"isStanding"));

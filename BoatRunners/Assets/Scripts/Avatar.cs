@@ -81,6 +81,7 @@ public static class DupAvatar {
         //LoremIpsumGenerator loremIpsumGenerator = new LoremIpsumGenerator();
         //var text = loremIpsumGenerator.Next(3, 3);
     }
+
     private static List<string> ImplementList()
     {
         return new List<string>()
@@ -92,6 +93,30 @@ public static class DupAvatar {
                  WordGeneratorExample(),
                 };
     }
+    public static void CustomizeAvatar(GameObject thisCap, GameObject thisSG)
+    {
+
+        if (isSGSelected)
+        {
+            thisSG.SetActive(true);
+        }
+        if (isCapselected)
+        {
+            thisCap.SetActive(true);
+        }
+        if (!isSGSelected)
+        {
+            thisSG.SetActive(false);
+           
+        }
+        if (!isCapselected)
+        {
+            thisCap.SetActive(false);
+
+        }
+       // (isSGSelected ? new Action(TestMethod) : TestMethod)();
+    }
+    private static void TestMethod() { }
 }
 
 public class Avatar {

@@ -14,7 +14,7 @@ public class BoatsSettings : MonoBehaviour
     public GameObject selfTourBtn;
     public GameObject driveTourBtn;
     public GameObject restartBtn;
-
+  
     void Start()
     {
         gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, gameObject.transform.localPosition.y, gameObject.transform.localPosition.z);
@@ -24,6 +24,18 @@ public class BoatsSettings : MonoBehaviour
         //Application.Quit();
         StartCoroutine(LoadCurrentAsyncScene());
 
+    }
+    public void AvatarDesign()
+    {
+        StartCoroutine(LoadAvatarScene());
+    }
+    private IEnumerator LoadAvatarScene()
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Avatar");
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
     }
     IEnumerator LoadCurrentAsyncScene()
     {
