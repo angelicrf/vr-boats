@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DriverDriveAnim : MonoBehaviour
@@ -10,7 +11,24 @@ public class DriverDriveAnim : MonoBehaviour
     private bool isEntered = false;
     public GameObject avtCap;
     public GameObject avtSG;
-
+    public GameObject avtShoes;
+    public GameObject avtShirts;
+    public GameObject avtShorts;
+    public List<Material> shoesMts;
+    public List<Material> shortsMts;
+    public List<Material> shirtsMts;
+    private void Start()
+    {
+        if (!BoatOneStatics.isDrOptionsAuto)
+        {
+            if (shoesMts.Count > 0 && shirtsMts.Count > 0 && shirtsMts.Count > 0)
+            {
+                DupAvatar.dupMTShorts = shortsMts;
+                DupAvatar.dupMTShirts = shirtsMts;
+                DupAvatar.dupMTShoes = shoesMts;
+            }
+        }
+    }
     private void FixedUpdate()
     {
         if (BoatOneStatics.isTeleportCompleted)
@@ -18,9 +36,9 @@ public class DriverDriveAnim : MonoBehaviour
         {
             gameObject.transform.localRotation = Quaternion.Euler(0,0,0);
             gameObject.transform.localPosition = new Vector3(thisSeat.transform.localPosition.x - 0.1f, -1.24f, thisSeat.transform.localPosition.z + 0.65f);
-            if (avtSG && avtCap)
+            if (avtSG && avtCap && avtShirts && avtShoes && avtShorts)
             {
-                DupAvatar.CustomizeAvatar(avtCap, avtSG);
+                DupAvatar.CustomizeAvatar(avtCap, avtSG, avtShorts, avtShirts, avtShoes);
             }
             if (!BoatOneStatics.isBoatOneStartDrive)
             {

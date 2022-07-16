@@ -29,7 +29,21 @@ public class DriverAnimController : MonoBehaviour
     public GameObject driverDr;
     public GameObject avtCap;
     public GameObject avtSG;
-
+    public GameObject avtShoes;
+    public GameObject avtShirts;
+    public GameObject avtShorts;
+    public List<Material> shoesMts;
+    public List<Material> shortsMts;
+    public List<Material> shirtsMts;
+    private void Start()
+    {
+        if (shoesMts.Count > 0 && shirtsMts.Count > 0 && shirtsMts.Count > 0)
+        {
+            DupAvatar.dupMTShorts = shortsMts;
+            DupAvatar.dupMTShirts = shirtsMts;
+            DupAvatar.dupMTShoes = shoesMts;
+        }
+    }
     void FixedUpdate()
     {
         if (BoatOneStatics.isTeleportCompleted)
@@ -37,9 +51,9 @@ public class DriverAnimController : MonoBehaviour
             if (!isSetUp)
             {
                 //customize avatar
-                if (avtSG && avtCap)
+                if (avtSG && avtCap && avtShirts && avtShoes && avtShorts)
                 {
-                    DupAvatar.CustomizeAvatar(avtCap, avtSG);
+                    DupAvatar.CustomizeAvatar(avtCap, avtSG, avtShorts, avtShirts, avtShoes);
                 }
                 StartCoroutine(DriverStatics.RunAnimCo(gameObject, "isStandOnCell", res => isSetUp = res));
             }

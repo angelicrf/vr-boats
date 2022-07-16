@@ -34,10 +34,23 @@ public static class DupAvatar {
 
     private static Sprite spOne, spTwo, spThree, spFour, spFive,spSix;
     public static List<Avatar> dupAvatrs = new List<Avatar>();
+    private static Material mtShortOne,mtShortTwo, mtOrShort,mtShirtOne, mtShirtTwo,mtOrShirt,mtShoesOne,mtShoesTwo,mtOrShoes;
     private static List<Sprite> dupSprites = new List<Sprite>()
        {
          spOne,spTwo,spThree,spFour,spFive,spSix
        };
+    public static List<Material> dupMTShoes = new List<Material>()
+    {
+      mtShoesOne,mtShoesTwo,mtOrShoes
+    };
+    public static List<Material> dupMTShorts = new List<Material>()
+    {
+       mtShortOne,mtShortTwo, mtOrShort
+    };
+    public static List<Material> dupMTShirts = new List<Material>()
+    {
+       mtShirtOne, mtShirtTwo,mtOrShirt
+    };
     public static int avtCurrentId { get; set; }
     public static List<Avatar> avatarsList = new List<Avatar>
         {
@@ -93,9 +106,9 @@ public static class DupAvatar {
                  WordGeneratorExample(),
                 };
     }
-    public static void CustomizeAvatar(GameObject thisCap, GameObject thisSG)
+    public static void CustomizeAvatar(GameObject thisCap, GameObject thisSG, GameObject thisPant, GameObject thisShirt, GameObject thisShoes)
     {
-
+       
         if (isSGSelected)
         {
             thisSG.SetActive(true);
@@ -107,14 +120,60 @@ public static class DupAvatar {
         if (!isSGSelected)
         {
             thisSG.SetActive(false);
-           
         }
         if (!isCapselected)
         {
             thisCap.SetActive(false);
-
         }
-       // (isSGSelected ? new Action(TestMethod) : TestMethod)();
+        if (isShoeOne)
+        {
+            thisShoes.GetComponent<SkinnedMeshRenderer>().material = dupMTShoes[0];
+        }
+        if (!isShoeOne && !isShoeTwo)
+        {
+            thisShoes.GetComponent<SkinnedMeshRenderer>().material = dupMTShoes[2];
+        }
+        if (isShoeTwo)
+        {
+            thisShoes.GetComponent<SkinnedMeshRenderer>().material = dupMTShoes[1];
+        }
+        //if (!isShoeTwo)
+        //{
+        //    thisShoes.GetComponent<SkinnedMeshRenderer>().material = dupMTShoes[2];
+        //}
+        if (isShirtOne )
+        {
+            thisShirt.GetComponent<SkinnedMeshRenderer>().material = dupMTShirts[0];
+        }
+        if (!isShirtOne && !isShirtTwo)
+        {
+            thisShirt.GetComponent<SkinnedMeshRenderer>().material = dupMTShirts[2];
+        }
+        if (isShirtTwo)
+        {
+            thisShirt.GetComponent<SkinnedMeshRenderer>().material = dupMTShirts[1];
+        }
+        //if (!isShirtTwo)
+        //{
+        //    thisShirt.GetComponent<SkinnedMeshRenderer>().material = dupMTShirts[2];
+        //}
+        if (isShortOne)
+        {
+            thisPant.GetComponent<SkinnedMeshRenderer>().material = dupMTShorts[0];
+        }
+        if (!isShortOne && !isShortTwo)
+        {
+            thisPant.GetComponent<SkinnedMeshRenderer>().material = dupMTShorts[2];
+        }
+        if (isShortTwo)
+        {
+            thisPant.GetComponent<SkinnedMeshRenderer>().material = dupMTShorts[1];
+        }
+        //if (!isShortOne )
+        //{
+        //    thisPant.GetComponent<SkinnedMeshRenderer>().material = dupMTShorts[2];
+        //}
+        // (isSGSelected ? new Action(TestMethod) : TestMethod)();
     }
     private static void TestMethod() { }
 }

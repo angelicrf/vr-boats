@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DriverBtnPushAnim : MonoBehaviour
@@ -17,13 +18,31 @@ public class DriverBtnPushAnim : MonoBehaviour
     public GameObject avtCap;
     public GameObject avtSG;
     public AudioClip lightSystem;
+    public GameObject avtShoes;
+    public GameObject avtShirts;
+    public GameObject avtShorts;
+    public List<Material> shoesMts;
+    public List<Material> shortsMts;
+    public List<Material> shirtsMts;
+    private void Start()
+    {
+        if (!BoatOneStatics.isDrOptionsAuto)
+        {
+            if (shoesMts.Count > 0 && shirtsMts.Count > 0 && shirtsMts.Count > 0)
+            {
+                DupAvatar.dupMTShorts = shortsMts;
+                DupAvatar.dupMTShirts = shirtsMts;
+                DupAvatar.dupMTShoes = shoesMts;
+            }
+        }
+    }
     void FixedUpdate()
     {
        if (BoatOneStatics.isTeleportCompleted)
        {
-            if (avtSG && avtCap)
+            if (avtSG && avtCap && avtShirts && avtShoes && avtShorts)
             {
-                DupAvatar.CustomizeAvatar(avtCap, avtSG);
+                DupAvatar.CustomizeAvatar(avtCap, avtSG, avtShorts, avtShirts, avtShoes);
             }
             if (!isStartedBtn)
             {
