@@ -129,50 +129,38 @@ public static class DupAvatar {
         {
             thisShoes.GetComponent<SkinnedMeshRenderer>().material = dupMTShoes[0];
         }
-        if (!isShoeOne && !isShoeTwo)
-        {
-            thisShoes.GetComponent<SkinnedMeshRenderer>().material = dupMTShoes[2];
-        }
         if (isShoeTwo)
         {
             thisShoes.GetComponent<SkinnedMeshRenderer>().material = dupMTShoes[1];
         }
-        //if (!isShoeTwo)
-        //{
-        //    thisShoes.GetComponent<SkinnedMeshRenderer>().material = dupMTShoes[2];
-        //}
+        if (!isShoeOne && !isShoeTwo)
+        {
+            thisShoes.GetComponent<SkinnedMeshRenderer>().material = dupMTShoes[2];
+        }
         if (isShirtOne )
         {
             thisShirt.GetComponent<SkinnedMeshRenderer>().material = dupMTShirts[0];
-        }
-        if (!isShirtOne && !isShirtTwo)
-        {
-            thisShirt.GetComponent<SkinnedMeshRenderer>().material = dupMTShirts[2];
         }
         if (isShirtTwo)
         {
             thisShirt.GetComponent<SkinnedMeshRenderer>().material = dupMTShirts[1];
         }
-        //if (!isShirtTwo)
-        //{
-        //    thisShirt.GetComponent<SkinnedMeshRenderer>().material = dupMTShirts[2];
-        //}
+        if (!isShirtOne && !isShirtTwo)
+        {
+            thisShirt.GetComponent<SkinnedMeshRenderer>().material = dupMTShirts[2];
+        }
         if (isShortOne)
         {
             thisPant.GetComponent<SkinnedMeshRenderer>().material = dupMTShorts[0];
-        }
-        if (!isShortOne && !isShortTwo)
-        {
-            thisPant.GetComponent<SkinnedMeshRenderer>().material = dupMTShorts[2];
         }
         if (isShortTwo)
         {
             thisPant.GetComponent<SkinnedMeshRenderer>().material = dupMTShorts[1];
         }
-        //if (!isShortOne )
-        //{
-        //    thisPant.GetComponent<SkinnedMeshRenderer>().material = dupMTShorts[2];
-        //}
+        if (!isShortOne && !isShortTwo)
+        {
+            thisPant.GetComponent<SkinnedMeshRenderer>().material = dupMTShorts[2];
+        }
         // (isSGSelected ? new Action(TestMethod) : TestMethod)();
     }
     private static void TestMethod() { }

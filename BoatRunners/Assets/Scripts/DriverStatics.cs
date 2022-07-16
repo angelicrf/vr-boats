@@ -43,12 +43,15 @@ public static class DriverStatics {
             }
         }
     }
+    public static void EndLoopAnime(GameObject thisObj)
+    {
+        thisObj.GetComponent<Animator>().enabled = false;
+    }
     public static IEnumerator MoveDriveToWalkAnimCo(GameObject thisObj, GameObject otherObj)
     {
         if (otherObj)
         {
-            thisObj.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].wrapMode = WrapMode.Once;
-            yield return new WaitForSeconds(5f);
+            //thisObj.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].wrapMode = WrapMode.Once;
             thisObj.GetComponent<Animator>().enabled = false;
             yield return new WaitForSeconds(2f);
             thisObj.SetActive(false);

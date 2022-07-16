@@ -37,9 +37,12 @@ public class DriverStandAnim : MonoBehaviour
 
         if (BoatOneStatics.isTeleportCompleted)
         {
-            if (avtSG && avtCap && avtShirts && avtShoes && avtShorts)
+            if (!BoatOneStatics.isDrOptionsAuto)
             {
-                DupAvatar.CustomizeAvatar(avtCap, avtSG, avtShorts,avtShirts,avtShoes);
+                if (avtSG && avtCap && avtShirts && avtShoes && avtShorts)
+                {
+                    DupAvatar.CustomizeAvatar(avtCap, avtSG, avtShorts, avtShirts, avtShoes);
+                }
             }
             if (!isDrStanding)
             {
@@ -57,13 +60,14 @@ public class DriverStandAnim : MonoBehaviour
                     isDrStandSec = true;
                 }
             }
-            if (isInfoDone && isDrStandSec)
+            if (isInfoDone && isDrStandSec && !isBtnStart)
             {
                 StartCoroutine(DriverStatics.MoveToWalkTalkAnimCo(gameObject, res => isBtnStart = res, "isWalking", "isStanding", "isBtnPushed", driverAudioBtn));
             }
             if (isBtnStart)
             {
                 // if play directly set it to print
+                Debug.Log("btnStart");
                 if (BoatOneStatics.isDrOptionsAuto)
                 {
                     gameObject.SetActive(false);

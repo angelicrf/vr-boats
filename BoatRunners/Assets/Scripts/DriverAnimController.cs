@@ -37,24 +37,30 @@ public class DriverAnimController : MonoBehaviour
     public List<Material> shirtsMts;
     private void Start()
     {
-        if (shoesMts.Count > 0 && shirtsMts.Count > 0 && shirtsMts.Count > 0)
+        if (BoatOneStatics.isDrOptionsAuto)
         {
-            DupAvatar.dupMTShorts = shortsMts;
-            DupAvatar.dupMTShirts = shirtsMts;
-            DupAvatar.dupMTShoes = shoesMts;
+            if (shoesMts.Count > 0 && shirtsMts.Count > 0 && shirtsMts.Count > 0)
+            {
+                DupAvatar.dupMTShorts = shortsMts;
+                DupAvatar.dupMTShirts = shirtsMts;
+                DupAvatar.dupMTShoes = shoesMts;
+            }
         }
     }
     void FixedUpdate()
     {
         if (BoatOneStatics.isTeleportCompleted)
         {
-            if (!isSetUp)
+            if (BoatOneStatics.isDrOptionsAuto)
             {
-                //customize avatar
                 if (avtSG && avtCap && avtShirts && avtShoes && avtShorts)
                 {
                     DupAvatar.CustomizeAvatar(avtCap, avtSG, avtShorts, avtShirts, avtShoes);
                 }
+            }
+            if (!isSetUp)
+            {
+                //customize avatar
                 StartCoroutine(DriverStatics.RunAnimCo(gameObject, "isStandOnCell", res => isSetUp = res));
             }
 

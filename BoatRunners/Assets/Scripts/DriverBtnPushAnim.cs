@@ -40,9 +40,12 @@ public class DriverBtnPushAnim : MonoBehaviour
     {
        if (BoatOneStatics.isTeleportCompleted)
        {
-            if (avtSG && avtCap && avtShirts && avtShoes && avtShorts)
+            if (!BoatOneStatics.isDrOptionsAuto)
             {
-                DupAvatar.CustomizeAvatar(avtCap, avtSG, avtShorts, avtShirts, avtShoes);
+                if (avtSG && avtCap && avtShirts && avtShoes && avtShorts)
+                {
+                    DupAvatar.CustomizeAvatar(avtCap, avtSG, avtShorts, avtShirts, avtShoes);
+                }
             }
             if (!isStartedBtn)
             {

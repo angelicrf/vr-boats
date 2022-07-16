@@ -36,9 +36,12 @@ public class DriverDriveAnim : MonoBehaviour
         {
             gameObject.transform.localRotation = Quaternion.Euler(0,0,0);
             gameObject.transform.localPosition = new Vector3(thisSeat.transform.localPosition.x - 0.1f, -1.24f, thisSeat.transform.localPosition.z + 0.65f);
-            if (avtSG && avtCap && avtShirts && avtShoes && avtShorts)
-            {
-                DupAvatar.CustomizeAvatar(avtCap, avtSG, avtShorts, avtShirts, avtShoes);
+            if (!BoatOneStatics.isDrOptionsAuto)
+            { 
+                if (avtSG && avtCap && avtShirts && avtShoes && avtShorts)
+                {
+                    DupAvatar.CustomizeAvatar(avtCap, avtSG, avtShorts, avtShirts, avtShoes);
+                }
             }
             if (!BoatOneStatics.isBoatOneStartDrive)
             {
@@ -50,6 +53,10 @@ public class DriverDriveAnim : MonoBehaviour
                     }
                 }
                 StartCoroutine(DriverStatics.MoveToDriveAnimCo(gameObject, "isDriving", res => BoatOneStatics.isDriveBoatOne = res));
+            }
+            if (BoatOneStatics.isBoatOneStartDrive && !BoatOneStatics.isDriveBoatOne)
+            {
+                DriverStatics.EndLoopAnime(gameObject);
             }
             if (BoatOneStatics.isBoatOneStartDrive && !BoatOneStatics.isDriveBoatOne && BoatOneStatics.isDrOptionsAuto)
             {
